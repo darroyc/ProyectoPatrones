@@ -49,7 +49,8 @@ Revisión intermedia 2 de diciembre: avance, cambios de diseño y razones.
 Entrega final el 16 de diciembre. Cada grupo debe estar presente ese día en la clase. Se le calificará el proyecto y se dará la nota individual a cada integrante. 
 
 ## Evaluación
-Pruebas: 20%
-Diseño inicial: 10%
-Diseño final y justificación de la evolución 20%
-Completitud funcional implementada 50%
+- Pruebas: 20%
+- Diseño inicial: 10%
+- Diseño final y justificación de la evolución 20%
+- Completitud funcional implementada 50%
+
