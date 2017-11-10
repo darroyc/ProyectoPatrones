@@ -14,7 +14,7 @@ Cada persona del grupo debe tener actividad en el repositorio. Una persona sin c
 
 La empresa DesarrollosElectrónicos S.A. necesita desarrollar un back-end core que maneje mensajería para el procesador de procesos de negocio. 
 
-Básicamente quieren hacer un software capaz de realizar un TRÁMITE, de principio a fin. Cada trámite tiene pasos. Y cada paso está asignado a una área funcional de la empresa responsable. Dentro de cada área funcional hay empleados. Hay trámites que pueden ser tomados por cualquier empleado [Opcional:y otros que solo pueden ser tomados por empleados con un rol específico. ].
+Básicamente quieren hacer un software capaz de realizar un TRÁMITE, de principio a fin. Cada trámite tiene pasos. Y cada paso está asignado a una área funcional de la empresa responsable. Dentro de cada área funcional hay empleados. Hay trámites que pueden ser tomados por cualquier empleado _[Opcional:y otros que solo pueden ser tomados por empleados con un rol específico. ]_.
 
 Un trámite puede ser un procesos como tal, o bien un “documento” que require llenado de campos, revisiones y autorizaciones. 
 
@@ -29,24 +29,19 @@ También debe ser posible ver la evolución de pasos del trámite: qué pasó, c
 
 ## Requerimientos
 
-No se necesita front-end. Puede hacerse todo con consola.. Aúnque suene increible. 
-
-Tienen que ser capaces de simular para probar los pasos de un trámite. 
-
-Tiene que haber firma y autenticación del destino y origen del documento. 
-
-Deben incluir PRUEBAS de las funciones. 
-
-Deben verificar la cobertura de las pruebas. 
+- No se necesita front-end. Puede hacerse todo con consola.. Aúnque suene increible. 
+- Tienen que ser capaces de simular para probar los pasos de un trámite. 
+- Tiene que haber firma y autenticación del destino y origen del documento. 
+- Deben incluir PRUEBAS de las funciones. 
+- Deben verificar la cobertura de las pruebas.
 
 
 ## Deadlines
 
-Entrega inicial: 11 de noviembre, especificar repositorio y diseño inicial del proyecto. 
+- Entrega inicial: **11 de noviembre**, especificar repositorio y diseño inicial del proyecto. 
+- Revisión intermedia **2 de diciembre**: avance, cambios de diseño y razones. 
+- Entrega final el **16 de diciembre**. Cada grupo debe estar presente ese día en la clase. Se le calificará el proyecto y se dará la nota individual a cada integrante.
 
-Revisión intermedia 2 de diciembre: avance, cambios de diseño y razones. 
-
-Entrega final el 16 de diciembre. Cada grupo debe estar presente ese día en la clase. Se le calificará el proyecto y se dará la nota individual a cada integrante. 
 
 ## Evaluación
 - Pruebas: 20%
