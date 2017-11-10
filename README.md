@@ -7,7 +7,7 @@ Repositorio dedicado a proyecto universitario. Programación con patrones. Terce
 
 Se realiza y se entrega en grupos de máximo 4 personas.
 
-Cada persona del grupo debe tener actividad en el repositorio. Una persona sin commits significa que no contribuyó al código y por lo tanto tendrá un cero como nota. 
+_Cada persona del grupo debe tener actividad en el repositorio. Una persona sin commits significa que no contribuyó al código y por lo tanto tendrá un cero como nota._
 
 
 ## Contexto
@@ -38,9 +38,9 @@ También debe ser posible ver la evolución de pasos del trámite: qué pasó, c
 
 ## Deadlines
 
-- Entrega inicial: **11 de noviembre**, especificar repositorio y diseño inicial del proyecto. 
-- Revisión intermedia **2 de diciembre**: avance, cambios de diseño y razones. 
-- Entrega final el **16 de diciembre**. Cada grupo debe estar presente ese día en la clase. Se le calificará el proyecto y se dará la nota individual a cada integrante.
+- **Entrega inicial 11 de noviembre**: especificar repositorio y diseño inicial del proyecto. 
+- **Revisión intermedia 2 de diciembre**: avance, cambios de diseño y razones. 
+- **Entrega final el 16 de diciembre**: cada grupo debe estar presente ese día en la clase. Se le calificará el proyecto y se dará la nota individual a cada integrante.
 
 
 ## Evaluación
