@@ -1,6 +1,6 @@
 package com.sistemacompras;
 
-import com.sistemacompras.multis.MultiLlavePublica;
+import com.sistemacompras.multis.MDepartamento;
 
 /**
  * Hello world!

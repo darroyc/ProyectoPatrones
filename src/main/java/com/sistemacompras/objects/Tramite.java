@@ -1,21 +1,18 @@
 package com.sistemacompras.objects;
 
-import java.util.ArrayList;
-
 public class Tramite {
+	int id;
 	String firmaDigital;
 	String origen;
 	String destino;
-	String id;
-	ArrayList<String> listaTramites = new ArrayList<String>();
+
 	
-	public Tramite(String firmaDigital, String origen, String destino, String id, ArrayList<String> listaTramites) {
+	public Tramite(int id, String firmaDigital, String origen, String destino) {
 		super();
 		this.firmaDigital = firmaDigital;
 		this.origen = origen;
 		this.destino = destino;
 		this.id = id;
-		this.listaTramites = listaTramites;
 	}
 
 	public String getFirmaDigital() {
@@ -42,26 +39,18 @@ public class Tramite {
 		this.destino = destino;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
-	}
-
-	public ArrayList<String> getListaTramites() {
-		return listaTramites;
-	}
-
-	public void setListaTramites(ArrayList<String> listaTramites) {
-		this.listaTramites = listaTramites;
 	}
 
 	@Override
 	public String toString() {
 		return "Tramite [firmaDigital=" + firmaDigital + ", origen=" + origen + ", destino=" + destino + ", id=" + id
-				+ ", listaTramites=" + listaTramites + "]";
+				+ "]";
 	}
 	
 }

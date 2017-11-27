@@ -1,17 +1,15 @@
 package com.sistemacompras.objects;
 
 public class Empleado {
+	int id;
 	String nombre;
-	String id;
 	String rol;
-	Departamento departamento;
 	
-	public Empleado(String nombre, String id, String rol, Departamento departamento) {
+	public Empleado(int id, String nombre, String rol) {
 		super();
 		this.nombre = nombre;
 		this.id = id;
 		this.rol = rol;
-		this.departamento = departamento;
 	}
 
 	public String getNombre() {
@@ -22,11 +20,11 @@ public class Empleado {
 		this.nombre = nombre;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -38,17 +36,9 @@ public class Empleado {
 		this.rol = rol;
 	}
 
-	public Departamento getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
-	}
-
 	@Override
 	public String toString() {
-		return "Empleado [nombre=" + nombre + ", id=" + id + ", rol=" + rol + ", departamento=" + departamento + "]";
+		return "Empleado [nombre=" + nombre + ", id=" + id + ", rol=" + rol + "]";
 	}
 	
 }

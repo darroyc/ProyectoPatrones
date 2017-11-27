@@ -1,41 +1,46 @@
 package com.sistemacompras.objects;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Departamento {
+	int id;
 	String nombre;
-	String id;
-	Empleado listaEmpleados[] = new Empleado[10];
+	ArrayList<Empleado> listaEmpleados;
 	
-	public Departamento(String nombre, String id, Empleado[] listaEmpleados) {
-		super();
-		this.nombre = nombre;
+	public Departamento(int id, String nombre, ArrayList<Empleado> listaEmpleados) {
 		this.id = id;
+		this.nombre = nombre;
 		this.listaEmpleados = listaEmpleados;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public Empleado[] getListaEmpleados() {
+
+	public ArrayList<Empleado> getListaEmpleados() {
 		return listaEmpleados;
 	}
-	public void setListaEmpleados(Empleado[] listaEmpleados) {
+
+	public void setListaEmpleados(ArrayList<Empleado> listaEmpleados) {
 		this.listaEmpleados = listaEmpleados;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Departamento [nombre= \n" + nombre + ", id=" + id + ", listaEmpleados=" + Arrays.toString(listaEmpleados)
-				+ "]";
+		return "Departamento [id=" + id + ", nombre=" + nombre + ", listaEmpleados=" + listaEmpleados + "]";
 	}
+
 	
 }
