@@ -1,6 +1,5 @@
 package com.sitemascompras.encriptacion;
 
-<<<<<<< HEAD
 import java.math.BigInteger;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -46,14 +45,5 @@ public class ControladorEncriptacion {
 	}
 	
 	
-
-=======
-public class ControladorEncriptacion {
-	private final String KEY_EXTENSION = ".key";
-	private final String PUBLIC = "public";
-	private final String PRIVATE = "private";
-	private final String MESSAGE_ENCRYPT_EXTENSION = ".encript";
-	private final String PATH = "C:/encrpitacion/";
->>>>>>> 219947124ee0e511bd81a34808a3f9ceba5e255f
 
 }
