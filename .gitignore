@@ -1,3 +1,4 @@
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -8,6 +9,16 @@ target/
 .project
 .settings
 .springBeans
+
+*.prefs
+
+.project
+
+*.class
+*.MF
+
+*.properties
+
 
 ### IntelliJ IDEA ###
 .idea
@@ -22,3 +33,5 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+
