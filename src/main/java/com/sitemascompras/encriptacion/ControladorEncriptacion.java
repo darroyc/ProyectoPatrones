@@ -1,6 +1,5 @@
 package com.sitemascompras.encriptacion;
 
-
 import java.math.BigInteger;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -46,5 +45,3 @@ public class ControladorEncriptacion {
 	}
 	
 }
-
-
