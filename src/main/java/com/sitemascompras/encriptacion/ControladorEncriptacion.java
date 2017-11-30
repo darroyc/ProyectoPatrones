@@ -1,6 +1,7 @@
 package com.sitemascompras.encriptacion;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+=======
+>>>>>>> e22e5a1165cc42a7170a6d123de82f94844a4856
 =======
 >>>>>>> e22e5a1165cc42a7170a6d123de82f94844a4856
 import java.math.BigInteger;
@@ -129,6 +132,7 @@ public class ControladorEncriptacion {
 	}
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private byte[] readMessageFile(String messageName) throws Exception{
 		File file = new File(MESSAGE_ENCRYPT_PATH + messageName + MESSAGE_ENCRYPT_EXTENSION);
         int length = (int) file.length();
@@ -147,6 +151,9 @@ public class ControladorEncriptacion {
 
 
 
+=======
+}
+>>>>>>> e22e5a1165cc42a7170a6d123de82f94844a4856
 =======
 }
 >>>>>>> e22e5a1165cc42a7170a6d123de82f94844a4856
