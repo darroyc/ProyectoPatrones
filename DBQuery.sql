@@ -13,6 +13,7 @@ CREATE TABLE tDepartamento(
 
 CREATE TABLE tTramite(
   idTramite INT NOT NULL AUTO_INCREMENT,
+  DescripcionTramite varchar (500),
   FirmaDigitalTramite varchar (250),
   OrigenTramite varchar (250),
   DestinoTramite varchar (250),

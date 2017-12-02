@@ -6,10 +6,10 @@ import static com.sistemacompras.gestorbd.Conector.getConector;;
 
 public class MTramite {
     
-    public void crearTramite(String firmaDigital, String origen, String destino) throws Exception{
+    public void crearTramite(String firmaDigital, String origen, String destino, String descripcionTramite ) throws Exception{
         String sql;
-        sql="INSERT INTO tTramite (FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
-        "VALUES ('"+firmaDigital+"','"+origen+"','"+destino+"');";
+        sql="INSERT INTO tTramite (DescripcionTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
+        "VALUES ('"+descripcionTramite+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
         
 		try {
 			getConector().ejecutarSQL(sql);
@@ -32,6 +32,7 @@ public class MTramite {
         if (rs.next()){
         	tramite = new Tramite(
                 rs.getInt("idTramite"),
+                rs.getString("DescripcionTramite"),
                 rs.getString("FirmaDigitalTramite"),
                 rs.getString("OrigenTramite"),
                 rs.getString("DestinoTramite")
@@ -58,6 +59,7 @@ public class MTramite {
             do {
             	tramite = new Tramite(
 	                rs.getInt("idTramite"),
+	                rs.getString("DescripcionTramite"),
 	                rs.getString("FirmaDigitalTramite"),
 	                rs.getString("OrigenTramite"),
 	                rs.getString("DestinoTramite")
