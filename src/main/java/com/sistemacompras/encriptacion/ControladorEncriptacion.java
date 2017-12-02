@@ -1,4 +1,4 @@
-package com.sitemascompras.encriptacion;
+package com.sistemacompras.encriptacion;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

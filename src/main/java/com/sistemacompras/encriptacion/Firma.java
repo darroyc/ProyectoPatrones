@@ -1,4 +1,4 @@
-package com.sitemascompras.encriptacion;
+package com.sistemacompras.encriptacion;
 import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
