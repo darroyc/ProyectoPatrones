@@ -100,6 +100,21 @@ public class MDepartamento {
             }
             
     }
+    
+    public void actualizarLlavePublica(int idDepartamento, String llavePublica) throws
+    java.sql.SQLException,Exception{
+    String sql;
+    sql="UPDATE tDepartamento "+
+    "SET LlavePublica='"+llavePublica+"'"+
+    "WHERE idDepartamento='"+idDepartamento+"';";
+    
+        try {
+            getConector().ejecutarSQL(sql); 	
+        }
+        catch (Exception e) {
+            throw new Exception ("El Departamento no está registrado.");
+        }
+}
 	
     public String buscarLlavePublica(int idDepartamento) throws java.sql.SQLException,Exception{
         String llavePublica;

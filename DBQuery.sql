@@ -13,9 +13,9 @@ CREATE TABLE tDepartamento(
 
 CREATE TABLE tTramite(
   idTramite INT NOT NULL AUTO_INCREMENT,
-  FirmaDigitalTramite varchar (60),
-  OrigenTramite varchar (60),
-  DestinoTramite varchar (60),
+  FirmaDigitalTramite varchar (250),
+  OrigenTramite varchar (250),
+  DestinoTramite varchar (250),
   PRIMARY KEY (idTramite) 
   );
 
