@@ -14,12 +14,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.Signature;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
@@ -37,6 +40,9 @@ public class ControladorEncriptacion {
 	private final String MESSAGE_ENCRYPT_PATH = "C:/encriptacion/mensajesEncriptados";
 	private final String PRIVATE_KEY_PATH = "C:/encrpitacion/llavesPrivadas";
 	private final String PUBLIC_KEY_PATH = "C:/encrpitacion/llavesPublicas";
+	private final String PATH = "C:/encrypt/asymetric/";//esta ruta es para probar si se esta guardando la firma digital
+	private static KeyPair kp;
+	private static String rutaArchivFirmar;
 	
 	
 	
@@ -45,7 +51,7 @@ public class ControladorEncriptacion {
 			KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
 			KeyFactory fact = KeyFactory.getInstance("RSA");
 			kpg.initialize(2048);
-			KeyPair kp = kpg.genKeyPair();
+			 kp = kpg.genKeyPair();
 			RSAPublicKeySpec pub = fact.getKeySpec(kp.getPublic(),
 			  RSAPublicKeySpec.class);
 			RSAPrivateKeySpec priv = fact.getKeySpec(kp.getPrivate(),
@@ -136,6 +142,33 @@ public class ControladorEncriptacion {
 		
 	}
 	
+	public void firmarTramite()  throws Exception {
+		
+		PrivateKey priv =kp.getPrivate();
+			
+			byte[] data = leerArchivo(rutaArchivFirmar);
+			Signature dsa = Signature.getInstance("SHA1withRSA"); 
+			dsa.initSign(priv);
+			dsa.update(data);
+			byte[] firma = dsa.sign();
+			
+			guardarFirma(PATH, firma);
+		}
+	
+	public byte[] leerArchivo(String ruta) throws Exception {
+		
+		return Files.readAllBytes(Paths.get(ruta));
+	}
+	
+	public void guardarFirma(String rutafirma, byte[] firma) throws Exception {
+		
+
+		FileOutputStream fos = new FileOutputStream(rutafirma+".digitalSignature");
+		fos.write(firma);
+		fos.close();
+		
+	}
+
 
 }// llave de la clase
 
