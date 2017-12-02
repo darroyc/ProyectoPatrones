@@ -19,7 +19,7 @@ public class MDepartamento {
         if (rs.next()){
         	departamento = new Departamento(
                 rs.getInt("idDepartamento"),
-                rs.getString("FirmaDigitalDepartamento"),
+                rs.getString("NombreDepartamento"),
                 buscarEmpleadosPorDepartamento(idDepartamento)
             );
         } else {
@@ -44,7 +44,7 @@ public class MDepartamento {
             do {
             	departamento = new Departamento(
                         rs.getInt("idDepartamento"),
-                        rs.getString("FirmaDigitalDepartamento"),
+                        rs.getString("NombreDepartamento"),
                         buscarEmpleadosPorDepartamento(rs.getInt("idDepartamento"))
                     );
 		Departamentos.add(departamento);
