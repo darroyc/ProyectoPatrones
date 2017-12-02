@@ -17,9 +17,6 @@ target/
 *.class
 *.MF
 
-*.properties
-
-
 ### IntelliJ IDEA ###
 .idea
 *.iws
