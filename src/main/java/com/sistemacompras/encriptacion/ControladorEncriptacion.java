@@ -22,12 +22,15 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.SecureRandom;
 import java.security.Signature;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Base64.Decoder;
 import java.util.Base64.Encoder;
+import java.util.HashMap;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -43,25 +46,46 @@ public class ControladorEncriptacion {
 	private final String PATH = "C:/encrypt/asymetric/";//esta ruta es para probar si se esta guardando la firma digital
 	private static KeyPair kp;
 	private static String rutaArchivFirmar;
+	public static ArrayList<String> listaLlaves = new ArrayList<String>();
 	
 	
 	
-	public void crearLlaves(String nombreLlave) throws Exception {
+	
+	
+	public ArrayList<String> crearLlaves() throws Exception {
+		String llavePrivada;
+		String llavePublica;
 		
-			KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-			KeyFactory fact = KeyFactory.getInstance("RSA");
-			kpg.initialize(2048);
-			 kp = kpg.genKeyPair();
-			RSAPublicKeySpec pub = fact.getKeySpec(kp.getPublic(),
-			  RSAPublicKeySpec.class);
-			RSAPrivateKeySpec priv = fact.getKeySpec(kp.getPrivate(),
-			  RSAPrivateKeySpec.class);
-	
-			saveToFile(PUBLIC_KEY_PATH + nombreLlave+"public.key", pub.getModulus(),
-			  pub.getPublicExponent());
-			saveToFile(PRIVATE_KEY_PATH + nombreLlave+"private.key", priv.getModulus(),
-			  priv.getPrivateExponent());
+		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DSA", "SUN");
+		SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
+		keyGen.initialize(512, random);
+		KeyPair pair = keyGen.generateKeyPair();
+		byte[]	 priv = pair.getPrivate().getEncoded();
+		byte[]	 pub = pair.getPublic().getEncoded();
+
+
+		llavePrivada = convertirLlavesString(priv);
+		llavePublica = convertirLlavesString(pub);
+		listaLlaves.add(llavePrivada);
+		listaLlaves.add(llavePublica);
 		
+		return listaLlaves ;
+	
+		
+			
+			
+			
+		
+	}
+	public String convertirLlavesString(byte[] llave) {
+		StringBuffer retString = new StringBuffer();
+		String llaveString;
+		for (int i = 0; i < llave.length; ++i) {
+            retString.append(Integer.toHexString(0x0100 + (llave[i] & 0x00FF)).substring(1));
+        }
+		llaveString = retString.toString();
+		
+		return llaveString;
 	}
 	
 	
@@ -168,6 +192,9 @@ public class ControladorEncriptacion {
 		fos.close();
 		
 	}
+	
+	
+	
 
 
 }// llave de la clase

@@ -2,10 +2,28 @@ package com.sistemacompras.multis;
 
 import static com.sistemacompras.gestorbd.Conector.getConector;
 import java.util.ArrayList;
+
+import com.sistemacompras.encriptacion.ControladorEncriptacion;
 import com.sistemacompras.objects.Departamento;
 import com.sistemacompras.objects.Empleado;
 
 public class MDepartamento {
+	ArrayList<String> listaLlaves = new ArrayList<String>();
+	
+	public void crearDepartamento(String nombreDepartamento) throws Exception {
+		String sql;
+		ControladorEncriptacion encrytar = new ControladorEncriptacion();
+		listaLlaves =  encrytar.crearLlaves();
+			sql ="insert into tdepartamento (NombreDepartamento,LlavePublica,LlavePrivada)"+
+					"values('"+nombreDepartamento+"','"+listaLlaves.get(1)+"','"+listaLlaves.get(0)+"');";
+			try {
+				getConector().ejecutarSQL(sql);
+			} catch (Exception e) {
+				throw new Exception (e.getMessage());
+					
+			}	
+		
+	}
     
     public Departamento buscarDepartamentoPorId(int idDepartamento) throws java.sql.SQLException,Exception{
         Departamento departamento;
@@ -134,5 +152,9 @@ public class MDepartamento {
         rs.close();
         return llavePublica;
     }
+    
+//    insert into tdepartamento(NombreDepartamento,LlavePublica,LlavePrivada)
+//    values("Nombre departamento","Privada","Publica")
+    
     
 }

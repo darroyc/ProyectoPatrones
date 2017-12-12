@@ -1,13 +1,16 @@
 package com.sistemacompras.multis;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import com.sistemacompras.objects.Tramite;
 import static com.sistemacompras.gestorbd.Conector.getConector;;
 
 public class MTramite {
+	Tramite tramite;
     
     public void crearTramite(String firmaDigital, String origen, String destino, String descripcionTramite ) throws Exception{
         String sql;
+
         sql="INSERT INTO tTramite (DescripcionTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
         "VALUES ('"+descripcionTramite+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
         
@@ -103,4 +106,6 @@ public class MTramite {
             }
             
     }
+    
+
 }
