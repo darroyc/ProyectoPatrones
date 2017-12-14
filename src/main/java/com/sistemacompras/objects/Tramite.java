@@ -3,13 +3,15 @@ package com.sistemacompras.objects;
 public class Tramite {
 	int id;
 	String descripcion;
+	String contenido;
 	String firmaDigital;
 	String origen;
 	String destino;
 	
-	public Tramite(int id, String descripcion, String firmaDigital, String origen, String destino) {
+	public Tramite(int id, String descripcion,String contenido, String firmaDigital, String origen, String destino) {
 		this.id = id;
 		this.descripcion = descripcion;
+		this.contenido = contenido;
 		this.firmaDigital = firmaDigital;
 		this.origen = origen;
 		this.destino = destino;

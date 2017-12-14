@@ -19,14 +19,14 @@ public class MDepartamento {
 			try {
 				getConector().ejecutarSQL(sql);
 			} catch (Exception e) {
-				throw new Exception (e.getMessage());
+				throw new Exception ("El departamento ya existe en el sistema.");
 					
 			}	
 		
 	}
     
     public Departamento buscarDepartamentoPorId(int idDepartamento) throws java.sql.SQLException,Exception{
-        Departamento departamento;
+       Departamento departamento;
         java.sql.ResultSet rs;
         String sql;
         sql = "SELECT * "+
@@ -39,6 +39,30 @@ public class MDepartamento {
                 rs.getInt("idDepartamento"),
                 rs.getString("NombreDepartamento"),
                 buscarEmpleadosPorDepartamento(idDepartamento)
+            );
+        } else {
+            throw new Exception ("Departamento no encontrado intentelo de nuevo.");
+            }
+
+        rs.close();
+        return departamento;
+    }
+    public Departamento buscarDepartamentoPorNombre(String nombreDepartamento) throws java.sql.SQLException,Exception{
+        Departamento departamento;
+        java.sql.ResultSet rs;
+        String sql;
+        sql = "SELECT * "+
+        "FROM tDepartamento "+
+        "WHERE NombreDepartamento='"+nombreDepartamento+"';";
+        rs = getConector().ejecutarSQL(sql,true);
+
+        if (rs.next()){
+        	departamento = new Departamento(
+                rs.getInt("idDepartamento"),
+                rs.getString("NombreDepartamento"),
+                rs.getString("LlavePublica"),
+                rs.getString("LlavePrivada")
+                
             );
         } else {
             throw new Exception ("Departamento no encontrado intentelo de nuevo.");
@@ -153,8 +177,7 @@ public class MDepartamento {
         return llavePublica;
     }
     
-//    insert into tdepartamento(NombreDepartamento,LlavePublica,LlavePrivada)
-//    values("Nombre departamento","Privada","Publica")
+
     
     
 }

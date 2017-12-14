@@ -78,6 +78,7 @@ public class ControladorEncriptacion {
 		
 	}
 	public String convertirLlavesString(byte[] llave) {
+		
 		StringBuffer retString = new StringBuffer();
 		String llaveString;
 		for (int i = 0; i < llave.length; ++i) {
@@ -105,15 +106,17 @@ public class ControladorEncriptacion {
 		
 	}
 
-	public void encryptMessage(String messageName, String message, String keyName) throws Exception {
+	public String encryptMessage(String message, String publickeyName) throws Exception {
 		
-		PublicKey pubKey = (PublicKey)readKeyFromFile(keyName, PUBLIC);
+		PublicKey pubKey = (PublicKey)readKeyFromFile(publickeyName, PUBLIC);
 		Cipher cipher = Cipher.getInstance("RSA");
 		cipher.init(Cipher.ENCRYPT_MODE, pubKey);
 		byte[] encryptedData = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
 	    Encoder oneEncoder = Base64.getEncoder();
 	    encryptedData = oneEncoder.encode(encryptedData);
-		writeBytesFile(messageName,encryptedData,MESSAGE_ENCRYPT_EXTENSION);
+	    String mensajeString = new String(encryptedData,StandardCharsets.UTF_8);
+		//writeBytesFile(messageName,encryptedData,MESSAGE_ENCRYPT_EXTENSION);
+	    return mensajeString;
 
 	}
 

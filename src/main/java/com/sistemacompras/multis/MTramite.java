@@ -2,17 +2,29 @@ package com.sistemacompras.multis;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import com.sistemacompras.encriptacion.ControladorEncriptacion;
+import com.sistemacompras.objects.Departamento;
 import com.sistemacompras.objects.Tramite;
-import static com.sistemacompras.gestorbd.Conector.getConector;;
+import static com.sistemacompras.gestorbd.Conector.getConector;
+
 
 public class MTramite {
+	ControladorEncriptacion encriptarMensaje = new ControladorEncriptacion();
 	Tramite tramite;
-    
-    public void crearTramite(String firmaDigital, String origen, String destino, String descripcionTramite ) throws Exception{
+	 MDepartamento buscardepartamento = new MDepartamento();
+	 Departamento departamento;
+    public void crearTramite(String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
         String sql;
-
-        sql="INSERT INTO tTramite (DescripcionTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
-        "VALUES ('"+descripcionTramite+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
+        String llavePublica;
+        String mensajeEncriptado;
+        
+        departamento = buscardepartamento.buscarDepartamentoPorNombre(origen);
+        llavePublica= departamento.getLlavePublica();
+        mensajeEncriptado= encriptarMensaje.encryptMessage(contenidoTramite, llavePublica);
+        
+        sql="INSERT INTO tTramite (DescripcionTramite,ContenidoTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
+        "VALUES ('"+descripcionTramite+"','"+mensajeEncriptado+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
         
 		try {
 			getConector().ejecutarSQL(sql);
@@ -36,6 +48,7 @@ public class MTramite {
         	tramite = new Tramite(
                 rs.getInt("idTramite"),
                 rs.getString("DescripcionTramite"),
+                rs.getString("ContenidoTramite"),
                 rs.getString("FirmaDigitalTramite"),
                 rs.getString("OrigenTramite"),
                 rs.getString("DestinoTramite")
@@ -63,6 +76,7 @@ public class MTramite {
             	tramite = new Tramite(
 	                rs.getInt("idTramite"),
 	                rs.getString("DescripcionTramite"),
+	                rs.getString("ContenidoTramite"),
 	                rs.getString("FirmaDigitalTramite"),
 	                rs.getString("OrigenTramite"),
 	                rs.getString("DestinoTramite")

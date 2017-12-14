@@ -18,24 +18,31 @@ public class Main {
 //		pruebaTramite = new MTramite();
 //		
 //		try {
-//			pruebaTramite.crearTramite("firma digital from el main", "origen: Main", "Destino : Cualquiera", "Prueba desde el main");
+//			pruebaTramite.crearTramite("Este tramite viene desde el main",
+//					"Estoy haciendo la prueba de encry", "Danilo", "IT", "Logistica");
 //			System.out.println("Se logro la insercion de datos");
 //		} catch (Exception e) {
 //			
 //			e.printStackTrace();
 //		}
-//	
-//	
 	
+	
+//	
+//		
+//		MDepartamento pruebaDepartamento = new MDepartamento();
+//		try {
+//			pruebaDepartamento.crearDepartamento("Ventas");
+//			System.out.println("Se logro la insercion de datos");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			
+//		}
 		
-		MDepartamento pruebaDepartamento = new MDepartamento();
-		try {
-			pruebaDepartamento.crearDepartamento("Logistica");
-			System.out.println("Se logro la insercion de datos");
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-		}
+	
+		pruebaTramite = new MTramite();
+		pruebaTramite.crearTramite("Esto es un tramite de prueba", "contenido a encriptar", "Firma", "Logistica", "IT");
+		
+		
 		
 	
 	}
