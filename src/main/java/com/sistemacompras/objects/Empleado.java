@@ -4,12 +4,22 @@ public class Empleado {
 	int id;
 	String nombre;
 	String rol;
+	String constrasenna;
 	
-	public Empleado(int id, String nombre, String rol) {
+	public Empleado(int id, String nombre, String rol,String constrasenna) {
 		super();
 		this.nombre = nombre;
 		this.id = id;
 		this.rol = rol;
+		this.constrasenna = constrasenna;
+	}
+
+	public String getConstrasenna() {
+		return constrasenna;
+	}
+
+	public void setConstrasenna(String constrasenna) {
+		this.constrasenna = constrasenna;
 	}
 
 	public String getNombre() {

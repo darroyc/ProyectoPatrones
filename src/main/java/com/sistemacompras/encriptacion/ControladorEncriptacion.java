@@ -16,16 +16,20 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.security.GeneralSecurityException;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.Signature;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Base64.Decoder;
@@ -33,6 +37,7 @@ import java.util.Base64.Encoder;
 import java.util.HashMap;
 
 import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 public class ControladorEncriptacion {
@@ -46,53 +51,39 @@ public class ControladorEncriptacion {
 	private final String PATH = "C:/encrypt/asymetric/";//esta ruta es para probar si se esta guardando la firma digital
 	private static KeyPair kp;
 	private static String rutaArchivFirmar;
-	public static ArrayList<String> listaLlaves = new ArrayList<String>();
 	
 	
 	
 	
 	
-	public ArrayList<String> crearLlaves() throws Exception {
-		String llavePrivada;
-		String llavePublica;
+	
+	public void crearLlaves(String name) throws Exception {
 		
-		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DSA", "SUN");
-		SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
-		keyGen.initialize(512, random);
-		KeyPair pair = keyGen.generateKeyPair();
-		byte[]	 priv = pair.getPrivate().getEncoded();
-		byte[]	 pub = pair.getPublic().getEncoded();
+		KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+		KeyFactory fact = KeyFactory.getInstance("RSA");
+		kpg.initialize(2048);
+		kp = kpg.genKeyPair();
+		RSAPublicKeySpec pub = fact.getKeySpec(kp.getPublic(),
+		  RSAPublicKeySpec.class);
+		RSAPrivateKeySpec priv = fact.getKeySpec(kp.getPrivate(),
+		  RSAPrivateKeySpec.class);
 
-
-		llavePrivada = convertirLlavesString(priv);
-		llavePublica = convertirLlavesString(pub);
-		listaLlaves.add(llavePrivada);
-		listaLlaves.add(llavePublica);
-		
-		return listaLlaves ;
-	
+		saveToFile(PATH + name+"public.key", pub.getModulus(),
+		  pub.getPublicExponent());
+		saveToFile(PATH + name+"private.key", priv.getModulus(),
+		  priv.getPrivateExponent());
 		
 			
 			
 			
 		
 	}
-	public String convertirLlavesString(byte[] llave) {
-		
-		StringBuffer retString = new StringBuffer();
-		String llaveString;
-		for (int i = 0; i < llave.length; ++i) {
-            retString.append(Integer.toHexString(0x0100 + (llave[i] & 0x00FF)).substring(1));
-        }
-		llaveString = retString.toString();
-		
-		return llaveString;
-	}
+	
 	
 	
 	public void saveToFile(String fileName,BigInteger mod, BigInteger exp) throws IOException {
 		
-			ObjectOutputStream oout = new ObjectOutputStream(
+					ObjectOutputStream oout = new ObjectOutputStream(
 				    new BufferedOutputStream(new FileOutputStream(fileName)));
 			try {
 				oout.writeObject(mod);
@@ -106,24 +97,33 @@ public class ControladorEncriptacion {
 		
 	}
 
-	public String encryptMessage(String message, String publickeyName) throws Exception {
+	public void encryptMessage(String messageName, String message, String keyName) throws Exception {
 		
-		PublicKey pubKey = (PublicKey)readKeyFromFile(publickeyName, PUBLIC);
+		PublicKey pubKey = (PublicKey)readKeyFromFile(keyName, PUBLIC);
 		Cipher cipher = Cipher.getInstance("RSA");
 		cipher.init(Cipher.ENCRYPT_MODE, pubKey);
 		byte[] encryptedData = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
 	    Encoder oneEncoder = Base64.getEncoder();
 	    encryptedData = oneEncoder.encode(encryptedData);
-	    String mensajeString = new String(encryptedData,StandardCharsets.UTF_8);
-		//writeBytesFile(messageName,encryptedData,MESSAGE_ENCRYPT_EXTENSION);
-	    return mensajeString;
+		writeBytesFile(messageName,encryptedData,MESSAGE_ENCRYPT_EXTENSION);
 
 	}
+	public void decryptMessage(String messageName, String keyName) throws Exception {
+		PrivateKey privKey = (PrivateKey)readKeyFromFile(keyName, PRIVATE);
+		Cipher cipher = Cipher.getInstance("RSA");
+		cipher.init(Cipher.DECRYPT_MODE, privKey);
+		byte[] encryptedMessage = readMessageFile(messageName);
+		byte[] decryptedData = cipher.doFinal(encryptedMessage);
+	    String message = new String(decryptedData,StandardCharsets.UTF_8);
+	    System.out.println("El mensaje era: ");
+		System.out.println(message);
+	}
+	
 
 
 	private void writeBytesFile(String name, byte[] content, String type) throws FileNotFoundException, IOException{
 		
-		FileOutputStream fos = new FileOutputStream(MESSAGE_ENCRYPT_PATH + name + type);
+		FileOutputStream fos = new FileOutputStream(PATH + name + type);
 		fos.write(content);
 		fos.close();
 		
@@ -132,7 +132,7 @@ public class ControladorEncriptacion {
 
 	Key readKeyFromFile(String keyFileName, String type) throws IOException {
 		
-		 InputStream in = new FileInputStream (PUBLIC_KEY_PATH + keyFileName+ type + KEY_EXTENSION);
+		 InputStream in = new FileInputStream (PATH + keyFileName+ type + KEY_EXTENSION);
 		  ObjectInputStream oin = new ObjectInputStream(new BufferedInputStream(in));
 		  try {
 		    BigInteger m = (BigInteger) oin.readObject();
@@ -158,7 +158,8 @@ public class ControladorEncriptacion {
 	}
 	
 	private byte[] readMessageFile(String messageName) throws Exception{
-		File file = new File(MESSAGE_ENCRYPT_PATH + messageName + MESSAGE_ENCRYPT_EXTENSION);
+		
+		File file = new File(PATH + messageName + MESSAGE_ENCRYPT_EXTENSION);
         int length = (int) file.length();
         BufferedInputStream reader = new BufferedInputStream(new FileInputStream(file));
         byte[] bytes = new byte[length];
@@ -166,6 +167,7 @@ public class ControladorEncriptacion {
         reader.close();
         Decoder oneDecoder = Base64.getDecoder();
 		return oneDecoder.decode(bytes);
+		
 		
 	}
 	
