@@ -1,4 +1,4 @@
-package com.testsMultis;
+package com.TestsMultis;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.sistemacompras.multis.MDepartamento;
-import com.sistemacompras.objects.Departamento;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -1,4 +1,4 @@
-package com.testsMultis;
+package com.TestsMultis;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
