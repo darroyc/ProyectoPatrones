@@ -116,7 +116,8 @@ public class MDepartamento {
             	empleado = new Empleado(
 	                rs.getInt("idEmpleado"),
 	                rs.getString("nombreEmpleado"),
-	                rs.getString("RolEmpleado")
+	                rs.getString("RolEmpleado"),
+	                rs.getString("ContrasennaEmpleado")
                 );
 		empleados.add(empleado);
 		} while (rs.next());

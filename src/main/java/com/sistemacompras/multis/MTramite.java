@@ -21,6 +21,8 @@ public class MTramite {
         
         departamento = buscardepartamento.buscarDepartamentoPorNombre(origen);
         llavePublica= departamento.getLlavePublica();
+        System.out.println(departamento.getLlavePublica());
+        System.out.println(departamento.getLlavePrivada());
         mensajeEncriptado= encriptarMensaje.encryptMessage(contenidoTramite, llavePublica);
         
         sql="INSERT INTO tTramite (DescripcionTramite,ContenidoTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+

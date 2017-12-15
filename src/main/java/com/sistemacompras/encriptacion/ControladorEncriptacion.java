@@ -51,39 +51,44 @@ public class ControladorEncriptacion {
 	private final String PATH = "C:/encrypt/asymetric/";//esta ruta es para probar si se esta guardando la firma digital
 	private static KeyPair kp;
 	private static String rutaArchivFirmar;
+	public static ArrayList<String> listaLlaves = new ArrayList<String>();
 	
-	
-	
-	
-	
-	
-	public void crearLlaves(String name) throws Exception {
+	public ArrayList<String> crearLlaves() throws Exception {
+		String llavePrivada;
+		String llavePublica;
 		
-		KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-		KeyFactory fact = KeyFactory.getInstance("RSA");
-		kpg.initialize(2048);
-		kp = kpg.genKeyPair();
-		RSAPublicKeySpec pub = fact.getKeySpec(kp.getPublic(),
-		  RSAPublicKeySpec.class);
-		RSAPrivateKeySpec priv = fact.getKeySpec(kp.getPrivate(),
-		  RSAPrivateKeySpec.class);
+		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
 
-		saveToFile(PATH + name+"public.key", pub.getModulus(),
-		  pub.getPublicExponent());
-		saveToFile(PATH + name+"private.key", priv.getModulus(),
-		  priv.getPrivateExponent());
+		keyGen.initialize(512);
+		KeyPair pair = keyGen.generateKeyPair();
+		byte[]	 priv = pair.getPrivate().getEncoded();
+		byte[]	 pub = pair.getPublic().getEncoded();
+
+		llavePrivada = convertirLlavesString(priv);
+		llavePublica = convertirLlavesString(pub);
+		listaLlaves.add(llavePrivada);
+		listaLlaves.add(llavePublica);
 		
-			
-			
-			
+		return listaLlaves;		
 		
+	}
+	public String convertirLlavesString(byte[] llave) {
+		
+
+		 String keyAsString = Base64.getEncoder().encodeToString(llave);
+		
+		return keyAsString;
+	}
+	public Key decodeKeyFromString(String keyString) throws GeneralSecurityException, IOException {
+		 byte[] data = Base64.getDecoder().decode((keyString.getBytes()));
+		 X509EncodedKeySpec spec = new X509EncodedKeySpec(data);
+		 KeyFactory fact = KeyFactory.getInstance("RSA");
+		 return fact.generatePublic(spec);
 	}
 	
 	
-	
-	public void saveToFile(String fileName,BigInteger mod, BigInteger exp) throws IOException {
-		
-					ObjectOutputStream oout = new ObjectOutputStream(
+	public void saveToFile(String fileName,BigInteger mod, BigInteger exp) throws IOException {	
+			ObjectOutputStream oout = new ObjectOutputStream(
 				    new BufferedOutputStream(new FileOutputStream(fileName)));
 			try {
 				oout.writeObject(mod);
@@ -93,46 +98,30 @@ public class ControladorEncriptacion {
 			} finally {
 			    oout.close();
 			}
-		
-		
 	}
 
-	public void encryptMessage(String messageName, String message, String keyName) throws Exception {
-		
-		PublicKey pubKey = (PublicKey)readKeyFromFile(keyName, PUBLIC);
+	public String encryptMessage(String message, String publickey) throws Exception {
+		PublicKey pubKey = (PublicKey) decodeKeyFromString(publickey);
 		Cipher cipher = Cipher.getInstance("RSA");
 		cipher.init(Cipher.ENCRYPT_MODE, pubKey);
 		byte[] encryptedData = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
 	    Encoder oneEncoder = Base64.getEncoder();
 	    encryptedData = oneEncoder.encode(encryptedData);
-		writeBytesFile(messageName,encryptedData,MESSAGE_ENCRYPT_EXTENSION);
-
+	    String mensajeString = new String(encryptedData,StandardCharsets.UTF_8);
+		//writeBytesFile(messageName,encryptedData,MESSAGE_ENCRYPT_EXTENSION);
+	    return mensajeString;
 	}
-	public void decryptMessage(String messageName, String keyName) throws Exception {
-		PrivateKey privKey = (PrivateKey)readKeyFromFile(keyName, PRIVATE);
-		Cipher cipher = Cipher.getInstance("RSA");
-		cipher.init(Cipher.DECRYPT_MODE, privKey);
-		byte[] encryptedMessage = readMessageFile(messageName);
-		byte[] decryptedData = cipher.doFinal(encryptedMessage);
-	    String message = new String(decryptedData,StandardCharsets.UTF_8);
-	    System.out.println("El mensaje era: ");
-		System.out.println(message);
-	}
-	
 
-
-	private void writeBytesFile(String name, byte[] content, String type) throws FileNotFoundException, IOException{
-		
-		FileOutputStream fos = new FileOutputStream(PATH + name + type);
+	private void writeBytesFile(String name, byte[] content, String type) throws FileNotFoundException, IOException{	
+		FileOutputStream fos = new FileOutputStream(MESSAGE_ENCRYPT_PATH + name + type);
 		fos.write(content);
 		fos.close();
 		
 	}
-
-
+	
 	Key readKeyFromFile(String keyFileName, String type) throws IOException {
 		
-		 InputStream in = new FileInputStream (PATH + keyFileName+ type + KEY_EXTENSION);
+		 InputStream in = new FileInputStream (PUBLIC_KEY_PATH + keyFileName+ type + KEY_EXTENSION);
 		  ObjectInputStream oin = new ObjectInputStream(new BufferedInputStream(in));
 		  try {
 		    BigInteger m = (BigInteger) oin.readObject();
@@ -158,8 +147,7 @@ public class ControladorEncriptacion {
 	}
 	
 	private byte[] readMessageFile(String messageName) throws Exception{
-		
-		File file = new File(PATH + messageName + MESSAGE_ENCRYPT_EXTENSION);
+		File file = new File(MESSAGE_ENCRYPT_PATH + messageName + MESSAGE_ENCRYPT_EXTENSION);
         int length = (int) file.length();
         BufferedInputStream reader = new BufferedInputStream(new FileInputStream(file));
         byte[] bytes = new byte[length];
@@ -167,7 +155,6 @@ public class ControladorEncriptacion {
         reader.close();
         Decoder oneDecoder = Base64.getDecoder();
 		return oneDecoder.decode(bytes);
-		
 		
 	}
 	
