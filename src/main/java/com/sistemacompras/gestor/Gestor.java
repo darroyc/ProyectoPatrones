@@ -22,7 +22,6 @@ public class Gestor {
         if(empleadoActivo.getConstrasenna().equals(pass)){
         	return empleadoActivo.getIdDepartamento();
         	}
-
        return null;
     }
 

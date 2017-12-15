@@ -12,8 +12,8 @@ import java.io.InputStreamReader;
 
 public class Menu {
     protected final Gestor GESTOR = new Gestor();
-    protected int option;
-    static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    protected Integer opcion;
+    protected static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     
     public void login()throws java.sql.SQLException, Exception{
         String pass;
@@ -23,7 +23,7 @@ public class Menu {
         print("\nIngrese su contrasenia");
         pass = in.readLine();
         
-        Integer opcion = GESTOR.login(id, pass);
+        opcion = GESTOR.login(id, pass);
         if(!opcion.equals(null)){
         	FabricaMenu.crearNuevoMenu(Departamentos.values()[opcion-1]);
         }else{
