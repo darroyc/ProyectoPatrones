@@ -14,9 +14,7 @@ public class MenuSolicitante extends Login{
     	String dato = "";
     	
 		System.out.println("1. Crear Tramite");
-		System.out.println("2. Buscar tramite por id");
-		System.out.println("3. Buscar tramite por nombre");
-		System.out.println("4. Salir");
+		System.out.println("2. Salir");
 		
 		dato = in.readLine();
 		opc = Integer.parseInt(dato);
@@ -25,14 +23,6 @@ public class MenuSolicitante extends Login{
 
 		case 1:
 			crearTramite();
-			break;
-			
-		case 2:
-			buscarTramiteId();
-			break;
-			
-		case 3:
-			buscarTramiteNombre();
 			break;
 			
 		case 4:
