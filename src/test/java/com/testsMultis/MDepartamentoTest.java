@@ -21,27 +21,27 @@ public class MDepartamentoTest {
 	
 	@Test
 	public void testCrearDep() throws Exception{
-		dep.crearDepartamento("Contaduria");
+		dep.crear("Contaduria");
 	}
 	
 	@Test
 	public void testBuscarDep() throws Exception{
-		dep.buscarDepartamentoPorId(1);
+		dep.buscarPorId(1);
 	}
 	
 	@Test
 	public void testBuscarDepPorNombre() throws Exception{
-		dep.buscarDepartamentoPorNombre("IT");
+		dep.buscarPorNombre("IT");
 	}
 	
 	@Test
 	public void testBuscarDepS() throws Exception{
-		dep.buscarDepartamentos();
+		dep.buscarLlavePublica(2);
 	}
 	
 	@Test
 	public void testBuscarEmpPorDep() throws Exception{
-		dep.buscarEmpleadosPorDepartamento(1);
+		dep.actualizarLlavePublica(2, "2");
 	}
 	
 }
