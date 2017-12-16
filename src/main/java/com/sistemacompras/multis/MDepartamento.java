@@ -1,6 +1,8 @@
 package com.sistemacompras.multis;
 
 import static com.sistemacompras.gestorbd.Conector.getConector;
+
+import java.security.KeyPair;
 import java.util.ArrayList;
 
 import com.sistemacompras.encriptacion.ControladorEncriptacion;
@@ -8,14 +10,18 @@ import com.sistemacompras.objects.Departamento;
 import com.sistemacompras.objects.Empleado;
 
 public class MDepartamento {
-	ArrayList<String> listaLlaves = new ArrayList<String>();
+
 	
 	public void crear(String nombreDepartamento) throws Exception {
 		String sql;
 		ControladorEncriptacion encrytar = new ControladorEncriptacion();
-		listaLlaves =  encrytar.crearLlaves();
+		KeyPair kp;
+		kp = encrytar.crearLlaves();
+		byte[]	 priv = kp.getPrivate().getEncoded();
+		byte[]	 pub = kp.getPublic().getEncoded();
+		
 			sql ="insert into tdepartamento (NombreDepartamento,LlavePublica,LlavePrivada)"+
-					"values('"+nombreDepartamento+"','"+listaLlaves.get(1)+"','"+listaLlaves.get(0)+"');";
+					"values('"+nombreDepartamento+"','"+pub+"','"+priv+"');";
 			try {
 				getConector().ejecutarSQL(sql);
 			} catch (Exception e) {
@@ -60,9 +66,9 @@ public class MDepartamento {
         if (rs.next()){
         	departamento = new Departamento(
                 rs.getInt("idDepartamento"),
-                rs.getString("NombreDepartamento"),
-                rs.getString("LlavePublica"),
-                rs.getString("LlavePrivada")                
+               rs.getString("NombreDepartamento"),
+               rs.getBytes("LlavePublica"),
+               rs.getBytes("LlavePrivada")
             );
         } else {
             throw new Exception ("Departamento no encontrado intentelo de nuevo.");

@@ -1,4 +1,4 @@
-package com.TestsMultis;
+package com.testsMultis;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class MTramiteTest {
 	
 	@Test
 	public void testCrearTramite() throws Exception{
-		tramite.crearTramite("Compra", "XY", "LL", "MM", "IT");
+		tramite.crearTramite("Compra", "XY", "LL", "MM", "IT","");
 	}
 	
 	@Test

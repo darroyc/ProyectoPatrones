@@ -1,5 +1,6 @@
 package Main;
 
+import java.security.KeyPair;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,24 +12,12 @@ import com.sistemacompras.objects.Tramite;
 
 public class Main {
 	
-	
+	private static KeyPair kp;
 	
 	public static void main(String[] args) throws SQLException, Exception {
-		String privateKey, message;
-		Departamento depa;
-		Tramite tramite;
-		MTramite pruebaTramite = new MTramite();
-		MDepartamento pruebaDepartamento = new MDepartamento();
-		ControladorEncriptacion encrypt = new ControladorEncriptacion();
 		
-		depa = pruebaDepartamento.buscarDepartamentoPorNombre("QA");	
 		
-		privateKey = depa.getLlavePrivada();
-		tramite =  pruebaTramite.buscarTramite(16);
-		message = tramite.getContenido();
-		System.out.println(message = tramite.getContenido());
 		
-		encrypt.decryptMessage(message, privateKey);
 		
 		
 		

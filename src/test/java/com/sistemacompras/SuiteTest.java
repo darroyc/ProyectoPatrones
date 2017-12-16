@@ -3,8 +3,8 @@ package com.sistemacompras;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import com.TestsMultis.MDepartamentoTest;
-import com.TestsMultis.MTramiteTest;
+import com.testsMultis.MDepartamentoTest;
+import com.testsMultis.MTramiteTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
