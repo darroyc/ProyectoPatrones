@@ -5,7 +5,6 @@
  */
 package com.sistemacompras.gestor;
 
-import com.sistemacompras.enums.Departamentos;
 import com.sistemacompras.multis.*;
 import com.sistemacompras.objects.*;
 

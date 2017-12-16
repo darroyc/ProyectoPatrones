@@ -33,6 +33,6 @@ public class ProyectoPatronesApplication {
 		Menu menu = new Menu();
 		menu.login();
 		
-		System.out.println("sominfo");
+			
 	}	
 }

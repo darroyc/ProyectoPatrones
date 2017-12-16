@@ -3,7 +3,6 @@ package com.sistemacompras.menus;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.sistemacompras.enums.Departamentos;
 import com.sistemacompras.gestor.Gestor;
 import com.sistemacompras.multis.*;
 import com.sistemacompras.objects.Tramite;
