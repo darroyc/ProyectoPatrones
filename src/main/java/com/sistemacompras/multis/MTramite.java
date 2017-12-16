@@ -98,13 +98,14 @@ public class MTramite {
     	
     }
     
-    public ArrayList<Tramite> buscarTramites() throws java.sql.SQLException,Exception{
+    public ArrayList<Tramite> buscarTramitesPorDestino(String destinoTramite) throws java.sql.SQLException,Exception{
         java.sql.ResultSet rs;
         String sql;
         Tramite tramite;
         ArrayList<Tramite> tramites = new ArrayList<Tramite>();
         sql="SELECT * "+
-        "FROM tTramite; ";
+        "FROM tTramite " + 
+        "WHERE DestinoTramite='"+destinoTramite+"';";
         getConector().ejecutarSQL(sql);
         rs = getConector().ejecutarSQL(sql,true);
         

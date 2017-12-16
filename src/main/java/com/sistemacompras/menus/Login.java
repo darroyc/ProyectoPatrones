@@ -10,27 +10,27 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
-public class Menu {
-    protected final Gestor GESTOR = new Gestor();
-    protected Integer opcion;
-    protected static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+public class Login {
+    private final Gestor GESTOR = new Gestor();
+    private Integer opcion;
+    private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     
-    public void login()throws java.sql.SQLException, Exception{
+    public void init()throws java.sql.SQLException, Exception{
     	try {
 	        String pass;
 	        int id;
-	        print("\nIngrese su id");
+	        System.out.println("Ingrese su id");
 	        id = Integer.parseInt(in.readLine());
-	        print("\nIngrese su contrasenia");
+	        System.out.println("Ingrese su contrasenia");
 	        pass = in.readLine();
 	        switch(GESTOR.login(id, pass)){
 	        	case "Administracion":
 		        	MenuAdministracion menuAdministracion = new MenuAdministracion();
-		        	//menuAdministracion.init();
+		        	menuAdministracion.init();
 		        	
 	        	case "Finanzas":
 		        	MenuFinanzas menuFinanzas = new MenuFinanzas();
-		        	//menuFinanzas.init();
+		        	menuFinanzas.init();
 		        	
 		        case "IT":
 		        	MenuIT menuIT = new MenuIT();
@@ -38,20 +38,16 @@ public class Menu {
 		        
 		        case "Otros":
 		        	MenuSolicitante menuSolicitante = new MenuSolicitante();
-		        	//menuSolicitante.init();
+		        	menuSolicitante.init();
+		        	
 		        case "":
-		        	print("Contrasenna errornea");
+		        	System.out.println("Contrasenna errornea");
 		        	TimeUnit.SECONDS.sleep(5);
-		        	login();
+		        	init();
 	        }
-	        
 	    }catch(Exception e){
 	        System.out.println("\nOpcion invalida, intente de nuevo");
-	        login();
+	        init();
 		}
-    }
-    
-    protected void print(String msg){
-        System.out.println(msg);
     }
 }

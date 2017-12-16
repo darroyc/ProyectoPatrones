@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import com.sistemacompras.gestor.Gestor;
 
-public class MenuSolicitante extends Menu{
+public class MenuSolicitante extends Login{
 	
 	Gestor gestor1 = new Gestor();
 

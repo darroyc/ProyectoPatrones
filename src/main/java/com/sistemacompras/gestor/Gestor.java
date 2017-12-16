@@ -42,8 +42,13 @@ public class Gestor {
     	TRAMITE.buscarTramitePorNombre(pnombre);
     }
     
-    public void cambiarDestinoTramite(int pid, String pdestino) throws SQLException, Exception {
+    public ArrayList<Tramite> buscarTramites(String destino) throws Exception {
+    	return TRAMITE.buscarTramitesPorDestino(destino);
+    }
+    
+    public String cambiarDestinoTramite(int pid, String pdestino) throws SQLException, Exception {
     	TRAMITE.actualizarDestinoTramite(pid, pdestino);
+    	return "Tramite Actualizado";
     }
     
     public void crearDepartamento(String nombreDepartamento) throws Exception {

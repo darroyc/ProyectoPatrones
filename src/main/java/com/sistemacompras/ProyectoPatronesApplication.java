@@ -30,8 +30,8 @@ public class ProyectoPatronesApplication {
 	    .bannerMode(Banner.Mode.OFF)
 	    .sources(ProyectoPatronesApplication.class)
 	    .run(args);
-		Menu menu = new Menu();
-		menu.login();
+		Login login = new Login();
+		login.init();
 		
 			
 	}	
