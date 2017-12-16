@@ -29,8 +29,8 @@ public class Menu {
 		        	//menuAdministracion.init();
 		        	
 	        	case "Finanzas":
-		        	MenuDepartamento menuDepartamento = new MenuDepartamento();//MenuFinanzas menuFinanzas = new MenuFinanzas();
-		        	//menuDepartamento.init();//menuFinanzas.init();
+		        	MenuFinanzas menuFinanzas = new MenuFinanzas();
+		        	//menuFinanzas.init();
 		        	
 		        case "IT":
 		        	MenuIT menuIT = new MenuIT();

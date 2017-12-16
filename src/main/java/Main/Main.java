@@ -17,15 +17,7 @@ public class Main {
 	private static KeyPair kp;
 	
 	public static void main(String[] args) throws SQLException, Exception {
-		
-<<<<<<< HEAD
-		
 		byte[] llavePublica;
-		
-		
-
-=======
->>>>>>> 91e516c003a76a1600e853a2b578aa570328f404
 		MDepartamento pruebaDepartamento =  new MDepartamento();
 		Departamento departamento;
 		departamento = pruebaDepartamento.buscarPorNombre("VoIP");

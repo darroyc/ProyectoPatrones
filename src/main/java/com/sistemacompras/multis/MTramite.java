@@ -15,24 +15,15 @@ public class MTramite {
 
 	public void crearTramite(String nombreTramite,String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
 
-	Tramite tramite;
-	 MDepartamento buscardepartamento = new MDepartamento();
-	 Departamento departamento;
-	 
-    public void crearTramite(String nombreTramite,String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
-    	
-<<<<<<< HEAD
-
-=======
->>>>>>> 91e516c003a76a1600e853a2b578aa570328f404
+		Tramite tramite;
+		MDepartamento buscardepartamento = new MDepartamento();
+		Departamento departamento;
         String sql;
         
         byte[] llavePublica;
         byte[] mensajeEncytado;
-		
-		MDepartamento pruebaDepartamento =  new MDepartamento();
-		Departamento departamento;
-		departamento = pruebaDepartamento.buscarPorNombre("VoIP");
+
+		departamento = buscardepartamento.buscarPorNombre("VoIP");
 		
 		llavePublica = departamento.getLlavePublica();
 		mensajeEncytado =	encriptarMensaje.encryptMessage(contenidoTramite, llavePublica);
