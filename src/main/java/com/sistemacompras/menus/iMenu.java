@@ -15,7 +15,7 @@ public abstract class iMenu {
 	protected static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	
 	public iMenu(String departamento) throws Exception {
-		for(Tramite tramite: GESTOR.buscarTramites("IT")) {
+		for(Tramite tramite: GESTOR.buscarTramites(departamento)) {
 			this.ids.add(tramite.getId());
 		}
 	}

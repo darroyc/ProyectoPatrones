@@ -114,8 +114,8 @@ public class MTramite {
                 );
 		tramites.add(tramite);
 		} while (rs.next());
-	} else {
-            throw new Exception ("No hay Tramites disponibles.");
+        } else {
+            return tramites;
         }
 
         rs.close();

@@ -27,10 +27,10 @@ public class Gestor {
     }
   
     public void crearTramite(String nombreTramite, String descripcionTramite ,
-    		String contenidoTramite, String firmaDigTramite, String origenTramite, String destinoTramite) throws Exception {
+    		String contenidoTramite, String firmaDigTramite) throws Exception {
     	
     	TRAMITE.crearTramite(nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, 
-    			origenTramite, destinoTramite);
+    			DEPARTAMENTO.buscarNombrePorId(empleadoActivo.getIdDepartamento()), "Administracion");
     }
     
     public void buscarTramite(int pIdTramite) throws SQLException, Exception {
@@ -49,6 +49,4 @@ public class Gestor {
     	TRAMITE.actualizarDestinoTramite(pid, pdestino);
     	return "Tramite Actualizado";
     }
-    
-  
 }

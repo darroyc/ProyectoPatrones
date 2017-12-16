@@ -46,7 +46,7 @@ public class ControladorEncriptacion {
 		private final String PATH = "C:/encrypt/asymetric/";
 		private static KeyPair kp;
 		private static String rutaArchivFirmar;
-		public static ArrayList<String> listaLlaves = new ArrayList<String>();
+		private static ArrayList<String> listaLlaves = new ArrayList<String>();
 		
 	public ArrayList<String> crearLlaves() throws Exception {
 		String llavePrivada;

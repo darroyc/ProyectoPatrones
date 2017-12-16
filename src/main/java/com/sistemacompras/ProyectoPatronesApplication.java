@@ -13,7 +13,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
+import com.sistemacompras.gestor.Gestor;
 import com.sistemacompras.menus.*;
+import com.sistemacompras.multis.MDepartamento;
 
 
 @SpringBootApplication

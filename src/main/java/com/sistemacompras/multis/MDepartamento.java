@@ -17,7 +17,7 @@ public class MDepartamento {
 		ArrayList<String> listaLlaves = encrytar.crearLlaves();
 		
 			sql="UPDATE tDepartamento "+
-			    "SET LlavePublica='"+listaLlaves.get(1)+"'"+"SET LlavePrivada='"+listaLlaves.get(0)+"' "+
+			    "SET LlavePublica='"+listaLlaves.get(1)+"'"+", LlavePrivada='"+listaLlaves.get(0)+"' "+
 			    "WHERE NombreDepartamento='"+nombreDepartamento+"';";
 			try {
 				getConector().ejecutarSQL(sql);

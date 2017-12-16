@@ -25,18 +25,22 @@ public class Login {
 	        pass = in.readLine();
 	        switch(GESTOR.login(id, pass)){
 	        	case "Administracion":
+	        		System.out.println("Bienvenido al departamento de administracion");
 		        	MenuAdministracion menuAdministracion = new MenuAdministracion();
 		        	menuAdministracion.init();
 		        	
 	        	case "Finanzas":
+	        		System.out.println("Bienvenido al departamento de finanza");
 		        	MenuFinanzas menuFinanzas = new MenuFinanzas();
 		        	menuFinanzas.init();
 		        	
 		        case "IT":
+		        	System.out.println("Bienvenido al departamento de IT");
 		        	MenuIT menuIT = new MenuIT();
 		        	menuIT.init();
 		        
 		        case "Otros":
+		        	System.out.println("Proceda a solicitar u");
 		        	MenuSolicitante menuSolicitante = new MenuSolicitante();
 		        	menuSolicitante.init();
 		        	
@@ -44,11 +48,10 @@ public class Login {
 		        	System.out.println("Contrasenna errornea");
 		        	TimeUnit.SECONDS.sleep(5);
 		        	init();
-	    }
-	        
-	    }catch(Exception e){
-	        System.out.println("\nOpcion invalida, intente de nuevo");
-	        init();
-		}
+	        }
+    	}catch(Exception e){
+            System.out.println("\nOpcion invalida, intente de nuevo");
+            init();
+        }    
     }
 }

@@ -29,33 +29,8 @@ public class MenuSolicitante extends Login{
 
     		case 1:
     			crearTramite();
-    			String nombreTramite = "";
-    			String descripcionTramite = "";
-    			String contenidoTramite = "";
-    			String firmaDigTramite = "";
-    			String origenTramite = "";
-    			String destinoTramite = "";
-        		
-        		System.out.println("Deme el nombre de su tramite");
-        		nombreTramite = in.readLine();
-        		
-        		System.out.println("Describa al tramite.");
-        		descripcionTramite = in.readLine();
-        		
-        		System.out.println("Ingrese textualmente el contenido del traminte.");
-        		contenidoTramite = in.readLine();
-        		
-        		System.out.println("Ingrese su firma Digital");
-        		firmaDigTramite = in.readLine();
-        		
-        		System.out.println("Digite el origen del tramite.");
-        		origenTramite = in.readLine();
-        		
-        		System.out.println("Digite el destino del traminte");
-        		destinoTramite = in.readLine();
-        		
-        		gestor1.crearTramite(nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, origenTramite, destinoTramite);
-
+    			break;
+    			
     		case 2:
     			buscarTramiteId();
     			break;
@@ -97,20 +72,10 @@ public class MenuSolicitante extends Login{
 		System.out.println("Ingrese textualmente el contenido del traminte.");
 		contenidoTramite = in.readLine();
 		
-		System.out.println("Ingrese su firma Digital");
-		firmaDigTramite = in.readLine();
-		
-		System.out.println("Digite el origen del tramite.");
-		origenTramite = in.readLine();
-		
 		System.out.println("Digite la firma digital.");
 		firmaDigTramite = in.readLine();
 		
-		System.out.println("Digite el destino del traminte");
-		destinoTramite = in.readLine();
-		
-		gestor1.crearTramite(nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite,
-				origenTramite, destinoTramite);
+		gestor1.crearTramite(nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite);
     }
     
     public void buscarTramiteId() throws SQLException, Exception {
