@@ -10,48 +10,39 @@ public class MenuSolicitante extends Login{
 
     public void init()throws java.sql.SQLException, Exception{
     	
-    	boolean continuar = false;
     	int opc = 0;
     	String dato = "";
     	
-    	do {
-    		System.out.println("1. Crear Tramite");
-    		System.out.println("2. Buscar tramite por id");
-    		System.out.println("3. Buscar tramite por nombre");
-    		System.out.println("4. Cambiar destino de tramite");
-    		System.out.println("5. Opción ver estado del tramite");
-    		System.out.println("6. Salir");
-    		
-    		dato = in.readLine();
-    		opc = Integer.parseInt(dato);
-    		
-    		switch(opc) {
+		System.out.println("1. Crear Tramite");
+		System.out.println("2. Buscar tramite por id");
+		System.out.println("3. Buscar tramite por nombre");
+		System.out.println("4. Salir");
+		
+		dato = in.readLine();
+		opc = Integer.parseInt(dato);
+		
+		switch(opc) {
 
-    		case 1:
-    			crearTramite();
-    			break;
-    			
-    		case 2:
-    			buscarTramiteId();
-    			break;
-    		case 3:
-    			buscarTramiteNombre();
-    			break;
-    		case 4:
-    			cambiarDestino();
-    			break;
-    		case 5:
-    			
-    			break;
-    		case 6:
-    			continuar = false;
-    			break;
-    		default:
-    			System.out.println("Opción invalida");
-    			break;
-    		}
-    	}
-    	while(continuar);
+		case 1:
+			crearTramite();
+			break;
+			
+		case 2:
+			buscarTramiteId();
+			break;
+			
+		case 3:
+			buscarTramiteNombre();
+			break;
+			
+		case 4:
+			System.exit(0);
+		
+		default:
+			System.out.println("Opción invalida");
+			init();
+			break;
+		}
 
     }
     
@@ -97,16 +88,5 @@ public class MenuSolicitante extends Login{
     	gestor1.buscarTramitePorNombre(nombre);
     }
     
-    public void cambiarDestino() throws SQLException, Exception {
-    	int id;
-    	String destino;
-    	
-    	System.out.println("Ingrese la identificación");
-    	id = Integer.parseInt(in.readLine());
-    	System.out.println("Ingrese el destino");
-    	destino = in.readLine();
-    	
-    	gestor1.cambiarDestinoTramite(id, destino);
-    }
 
 }
