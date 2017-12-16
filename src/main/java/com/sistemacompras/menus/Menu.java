@@ -22,8 +22,7 @@ public class Menu {
         id = Integer.parseInt(in.readLine());
         print("\nIngrese su contrasenia");
         pass = in.readLine();
-        
-        if(!GESTOR.login(id, pass).isEmpty()) {
+       
 	        switch(GESTOR.login(id, pass)){
 	        	case "Administracion":
 		        	MenuAdministracion menuAdministracion = new MenuAdministracion();
@@ -39,11 +38,10 @@ public class Menu {
 		        
 		        case "Otros":
 		        	MenuSolicitante menuSolicitante = new MenuSolicitante();
-		        	//menuSolicitante.init();    
+		        	//menuSolicitante.init();
+		        case "":
+		        	login();
 	        }
-        }else {
-        	login();
-        }
     }
     
     protected void print(String msg){
