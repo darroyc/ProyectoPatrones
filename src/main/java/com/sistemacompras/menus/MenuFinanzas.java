@@ -16,7 +16,13 @@ public class MenuFinanzas extends iMenu{
 	    
 	@Override
 	protected void aprobarTramite(int id) throws SQLException, Exception {
-		print(GESTOR.cambiarDestinoTramite(id, "IT"));
+		for(int idListaTramites: ids) {
+			if(idListaTramites==id){
+				print(GESTOR.cambiarDestinoTramite(id, "IT"));
+			}else {
+				print("El tramite no pertenece a este departamento");
+			}
+		}
 	}
 	
 }
