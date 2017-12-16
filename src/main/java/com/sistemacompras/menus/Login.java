@@ -11,9 +11,9 @@ import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
 public class Login {
-    private final Gestor GESTOR = new Gestor();
-    private Integer opcion;
-    private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    protected final Gestor GESTOR = new Gestor();
+    protected Integer opcion;
+    protected static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     
     public void init()throws java.sql.SQLException, Exception{
     	try {
@@ -44,7 +44,8 @@ public class Login {
 		        	System.out.println("Contrasenna errornea");
 		        	TimeUnit.SECONDS.sleep(5);
 		        	init();
-	        }
+	    }
+	        
 	    }catch(Exception e){
 	        System.out.println("\nOpcion invalida, intente de nuevo");
 	        init();

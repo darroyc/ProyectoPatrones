@@ -79,5 +79,4 @@ public class Tramite {
 	public String toString() {
 		return "ID: " + id + " - Descripcion: " + descripcion +"\n";
 	}
-	
 }

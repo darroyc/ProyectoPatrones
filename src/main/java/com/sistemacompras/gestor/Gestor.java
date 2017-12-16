@@ -26,7 +26,6 @@ public class Gestor {
         return "";
     }
   
-
     public void crearTramite(String nombreTramite, String descripcionTramite ,
     		String contenidoTramite, String firmaDigTramite, String origenTramite, String destinoTramite) throws Exception {
     	

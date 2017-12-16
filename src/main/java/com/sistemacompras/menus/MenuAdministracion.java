@@ -18,6 +18,4 @@ public class MenuAdministracion extends iMenu{
 	protected void aprobarTramite(int id) throws SQLException, Exception {
 		print(GESTOR.cambiarDestinoTramite(id, "Finanzas"));
 	}
-
-	
 }

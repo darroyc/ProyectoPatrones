@@ -28,11 +28,7 @@ public class MTramite {
 		llavePublica = departamento.getLlavePublica();
 		mensajeEncytado =	encriptarMensaje.encryptMessage(contenidoTramite, llavePublica);
 		
-   
-        
-        
-        
-        sql="INSERT INTO tTramite (NombreTramite,DescripcionTramite,ContenidoTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
+		sql="INSERT INTO tTramite (NombreTramite,DescripcionTramite,ContenidoTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
         "VALUES ('"+nombreTramite+"','"+descripcionTramite+"','"+mensajeEncytado+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
         
 		try {

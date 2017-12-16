@@ -32,7 +32,5 @@ public class ProyectoPatronesApplication {
 	    .run(args);
 		Login login = new Login();
 		login.init();
-		
-			
 	}	
 }

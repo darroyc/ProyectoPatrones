@@ -30,7 +30,7 @@ public class MTramiteTest {
 	
 	@Test
 	public void testBuscarTramites() throws Exception{
-		tramite.buscarTramites();
+		tramite.buscarTramitesPorDestino("IT");
 	}
 	
 	@Test
