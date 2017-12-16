@@ -19,12 +19,22 @@ public class Main {
 	public static void main(String[] args) throws SQLException, Exception {
 		
 		
+		byte[] llavePublica;
 		
 		
-		
+
 		MDepartamento pruebaDepartamento =  new MDepartamento();
 		Departamento departamento;
 		departamento = pruebaDepartamento.buscarPorNombre("VoIP");
+		
+		llavePublica = departamento.getLlavePublica();
+		MTramite pruebaTramite = new MTramite();
+	try {
+			pruebaTramite.crearTramite("Tramite vasos", "un tramite como cualquiera", "queremos mas vasos", "DVC", "VoIP", "QA");
+			System.out.println("Se logro la insercion de datos");
+	} catch (Exception e) {
+		e.printStackTrace();
+		}
 		
 		
 		
@@ -45,15 +55,15 @@ public class Main {
 	
 	
 		
-		
+//		
 //		try {
-//			pruebaDepartamento.crearDepartamento("QA");
+//			pruebaDepartamento.crear("QA");
 //			System.out.println("Se logro la insercion de datos");
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //			
 //		}
-		
+//		
 	
 //		pruebaTramite = new MTramite();
 //		pruebaTramite.crearTramite("Esto es un tramite de prueba", "contenido a encriptar", "Firma", "Logistica", "IT");
@@ -62,7 +72,4 @@ public class Main {
 		
 	
 	}
-	
-
-
 }
