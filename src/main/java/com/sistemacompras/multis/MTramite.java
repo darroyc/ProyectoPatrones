@@ -21,7 +21,10 @@ public class MTramite {
 	 
     public void crearTramite(String nombreTramite,String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
     	
+<<<<<<< HEAD
 
+=======
+>>>>>>> 91e516c003a76a1600e853a2b578aa570328f404
         String sql;
         
         byte[] llavePublica;

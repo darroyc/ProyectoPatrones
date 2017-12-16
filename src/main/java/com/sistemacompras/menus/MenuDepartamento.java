@@ -5,10 +5,10 @@ import com.sistemacompras.gestor.Gestor;
 import com.sistemacompras.multis.*;
 import com.sistemacompras.objects.Tramite;
 
-public class MenuIT extends Menu{
+public class MenuDepartamento extends Menu{
 	
 	Gestor gestor1 = new Gestor();
-
+	
     public void menuIt()throws java.sql.SQLException, Exception{
     	
     	boolean continuar = true;
@@ -16,7 +16,7 @@ public class MenuIT extends Menu{
     	String dato = "";
     	
     	do {
-    		System.out.println("1. Crear Tramite");
+    		System.out.println("1. Crear departamento");
     		System.out.println("2. Encriptar tramite");
     		System.out.println("3. Listar tramites");
     		System.out.println("4.  ");
@@ -27,33 +27,17 @@ public class MenuIT extends Menu{
     		switch(opc) {
 
     		case 1:
-    			String nombreTramite = "";
-    			String descripcionTramite = "";
-    			String contenidoTramite = "";
-    			String firmaDigTramite = "";
-    			String origenTramite = "";
-    			String destinoTramite = "";
+    	
+    			String nombreDepartamento = "";
         		
-        		System.out.println("Deme el nombre de su tramite");
-        		nombreTramite = in.readLine();
+        		System.out.println("Cual sera el nombre de este departamento?");
+        		nombreDepartamento = in.readLine();
         		
-        		System.out.println("Describa al tramite.");
-        		descripcionTramite = in.readLine();
-        		
-        		System.out.println("Ingrese textualmente el contenido del traminte.");
-        		contenidoTramite = in.readLine();
-        		
-        		System.out.println("Ingrese su firma Digital");
-        		firmaDigTramite = in.readLine();
-        		
-        		System.out.println("Digite el origen del tramite.");
-        		origenTramite = in.readLine();
-        		
-        		System.out.println("Digite el destino del traminte");
-        		destinoTramite = in.readLine();
-        		
-        		gestor1.crearTramite(nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, origenTramite, destinoTramite);
 
+        		gestor1.crearDepartamento(nombreDepartamento);
+
+    			break;
+    		
     		case 2:
     			break;
     		case 3:
