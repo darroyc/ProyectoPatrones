@@ -14,19 +14,17 @@ public class MTramite {
 	Tramite tramite;
 	 MDepartamento buscardepartamento = new MDepartamento();
 	 Departamento departamento;
-    public void crearTramite(String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
+    public void crearTramite(String nombreTramite,String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
         String sql;
         String llavePublica;
         String mensajeEncriptado;
         
         departamento = buscardepartamento.buscarDepartamentoPorNombre(origen);
         llavePublica= departamento.getLlavePublica();
-        System.out.println(departamento.getLlavePublica());
-        System.out.println(departamento.getLlavePrivada());
         mensajeEncriptado= encriptarMensaje.encryptMessage(contenidoTramite, llavePublica);
         
-        sql="INSERT INTO tTramite (DescripcionTramite,ContenidoTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
-        "VALUES ('"+descripcionTramite+"','"+mensajeEncriptado+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
+        sql="INSERT INTO tTramite (NombreTramite,DescripcionTramite,ContenidoTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
+        "VALUES ('"+nombreTramite+"','"+descripcionTramite+"','"+mensajeEncriptado+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
         
 		try {
 			getConector().ejecutarSQL(sql);
@@ -49,6 +47,7 @@ public class MTramite {
         if (rs.next()){
         	tramite = new Tramite(
                 rs.getInt("idTramite"),
+                rs.getString("NombreTramite"),
                 rs.getString("DescripcionTramite"),
                 rs.getString("ContenidoTramite"),
                 rs.getString("FirmaDigitalTramite"),
@@ -61,6 +60,34 @@ public class MTramite {
 
         rs.close();
         return tramite;
+    }
+    public Tramite buscarTramitePorNombre(String nombreTramite) throws SQLException, Exception {
+    	 Tramite tramite;
+         java.sql.ResultSet rs;
+         String sql;
+         sql = "SELECT * "+
+         "FROM tTramite "+
+         "WHERE NombreTramite='"+nombreTramite+"';";
+         rs = getConector().ejecutarSQL(sql,true);
+
+         if (rs.next()){
+         	tramite = new Tramite(
+                 rs.getInt("idTramite"),
+                 rs.getString("NombreTramite"),
+                 rs.getString("DescripcionTramite"),
+                 rs.getString("ContenidoTramite"),
+                 rs.getString("FirmaDigitalTramite"),
+                 rs.getString("OrigenTramite"),
+                 rs.getString("DestinoTramite")
+             );
+         } else {
+             throw new Exception ("Tramite no encontrado intentelo de nuevo.");
+             }
+
+         rs.close();
+         return tramite;
+    
+    	
     }
     
     public ArrayList<Tramite> buscarTramites() throws java.sql.SQLException,Exception{
@@ -77,6 +104,7 @@ public class MTramite {
             do {
             	tramite = new Tramite(
 	                rs.getInt("idTramite"),
+	                rs.getString("nombreTramite"),
 	                rs.getString("DescripcionTramite"),
 	                rs.getString("ContenidoTramite"),
 	                rs.getString("FirmaDigitalTramite"),

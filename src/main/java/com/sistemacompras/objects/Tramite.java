@@ -2,19 +2,37 @@ package com.sistemacompras.objects;
 
 public class Tramite {
 	int id;
+	String nombreTramite;
 	String descripcion;
 	String contenido;
 	String firmaDigital;
 	String origen;
 	String destino;
 	
-	public Tramite(int id, String descripcion,String contenido, String firmaDigital, String origen, String destino) {
+	public Tramite(int id, String nombreTramite,String descripcion,String contenido, String firmaDigital, String origen, String destino) {
 		this.id = id;
+		this.nombreTramite = nombreTramite;
 		this.descripcion = descripcion;
 		this.contenido = contenido;
 		this.firmaDigital = firmaDigital;
 		this.origen = origen;
 		this.destino = destino;
+	}
+
+	public String getNombreTramite() {
+		return nombreTramite;
+	}
+
+	public void setNombreTramite(String nombreTramite) {
+		this.nombreTramite = nombreTramite;
+	}
+
+	public String getContenido() {
+		return contenido;
+	}
+
+	public void setContenido(String contenido) {
+		this.contenido = contenido;
 	}
 
 	public int getId() {
