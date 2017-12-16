@@ -19,7 +19,7 @@ public class MEmpleado {
 		                rs.getInt("idEmpleado"),
 		                rs.getString("nombreEmpleado"),
 		                rs.getString("RolEmpleado"),
-		                rs.getString("ContrasennaEmpleado"),
+		                rs.getString("Contrasenna"),
 		                rs.getInt("idDepartamento")
 	                );
 	        } else {

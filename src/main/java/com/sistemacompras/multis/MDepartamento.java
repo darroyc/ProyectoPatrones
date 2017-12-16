@@ -11,7 +11,6 @@ import com.sistemacompras.objects.Empleado;
 
 public class MDepartamento {
 
-	
 	public void crear(String nombreDepartamento) throws Exception {
 		String sql;
 		ControladorEncriptacion encrytar = new ControladorEncriptacion();
@@ -28,7 +27,6 @@ public class MDepartamento {
 				throw new Exception ("El departamento ya existe en el sistema.");
 					
 			}	
-		
 	}
     
     public Departamento buscarPorId(int idDepartamento) throws java.sql.SQLException,Exception{
@@ -157,8 +155,4 @@ public class MDepartamento {
         rs.close();
         return llavePublica;
     }
-    
-
-    
-    
 }
