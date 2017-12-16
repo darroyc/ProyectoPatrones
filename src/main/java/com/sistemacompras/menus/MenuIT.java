@@ -6,6 +6,8 @@ import com.sistemacompras.multis.*;
 import com.sistemacompras.objects.Tramite;
 
 public class MenuIT extends Menu{
+	
+	Gestor gestor1 = new Gestor();
 
     public void menuIt()throws java.sql.SQLException, Exception{
     	
@@ -25,18 +27,12 @@ public class MenuIT extends Menu{
     		switch(opc) {
 
     		case 1:
-    			
-    			int idTramite;
     			String nombreTramite = "";
     			String descripcionTramite = "";
     			String contenidoTramite = "";
     			String firmaDigTramite = "";
     			String origenTramite = "";
     			String destinoTramite = "";
-    			
-    			System.out.println("Deme el ID de su tramite");
-        		dato = in.readLine();
-        		idTramite = Integer.parseInt(dato);
         		
         		System.out.println("Deme el nombre de su tramite");
         		nombreTramite = in.readLine();
@@ -56,15 +52,10 @@ public class MenuIT extends Menu{
         		System.out.println("Digite el destino del traminte");
         		destinoTramite = in.readLine();
         		
-//        		public Gestor gestorcito = new Gestor();
+
         		
-//        		gestorcito.crearTramite();
-        		
-//        		crearTramite(nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, origenTramite, destinoTramite);
-//
-//    			MTramite tramite = new MTramite(idTramite, nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, origenTramite, destinoTramite);
-    			break;
-    		
+        		gestor1.crearTramite(nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, origenTramite, destinoTramite);
+
     		case 2:
     			break;
     		case 3:
