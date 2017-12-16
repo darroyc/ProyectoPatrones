@@ -8,6 +8,7 @@ package com.sistemacompras.gestor;
 import com.sistemacompras.multis.*;
 import com.sistemacompras.objects.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Gestor {
@@ -25,10 +26,23 @@ public class Gestor {
        return null;
     }
 
-    public void crearTramite(String nombreTramite, String descripcionTramite ,String contenidoTramite, String firmaDigTramite, String origenTramite, String destinoTramite) {
+    public void crearTramite(String nombreTramite, String descripcionTramite ,
+    		String contenidoTramite, String firmaDigTramite, String origenTramite, String destinoTramite) throws Exception {
     	
-    	
-    	
+    	TRAMITE.crearTramite(nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, 
+    			origenTramite, destinoTramite);
+    }
+    
+    public void buscarTramite(int pIdTramite) throws SQLException, Exception {
+    	TRAMITE.buscarTramite(pIdTramite);
+    }
+    
+    public void buscarTramitePorNombre(String pnombre) throws Exception {
+    	TRAMITE.buscarTramitePorNombre(pnombre);
+    }
+    
+    public void cambiarDestinoTramite(int pid, String pdestino) throws SQLException, Exception {
+    	TRAMITE.actualizarDestinoTramite(pid, pdestino);
     }
     
     public void crearDepartamento(String nombreDepartamento) throws Exception {
