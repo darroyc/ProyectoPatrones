@@ -21,7 +21,7 @@ public class MDepartamentoTest {
 	
 	@Test
 	public void testCrearDep() throws Exception{
-		dep.crear("Contaduria");
+		dep.crearLlaves("Otros");
 	}
 	
 	@Test
@@ -39,9 +39,5 @@ public class MDepartamentoTest {
 		dep.buscarLlavePublica(2);
 	}
 	
-	@Test
-	public void testBuscarEmpPorDep() throws Exception{
-		dep.actualizarLlavePublica(2, "2");
-	}
 	
 }

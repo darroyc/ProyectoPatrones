@@ -50,7 +50,5 @@ public class Gestor {
     	return "Tramite Actualizado";
     }
     
-    public void crearDepartamento(String nombreDepartamento) throws Exception {
-    	DEPARTAMENTO.crear("ElDepartament");
-    }
+  
 }

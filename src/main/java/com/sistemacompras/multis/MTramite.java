@@ -19,7 +19,7 @@ public class MTramite {
         String llavePublica;
         String mensajeEncriptado;
         
-        departamento = buscardepartamento.buscarDepartamentoPorNombre(origen);
+        departamento = buscardepartamento.buscarPorNombre(origen);
         llavePublica= departamento.getLlavePublica();
         
         mensajeEncriptado = encriptarMensaje.encryptMessage(nombreTramite,contenidoTramite, llavePublica);

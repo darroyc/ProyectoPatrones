@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,7 +32,6 @@ import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Base64.Decoder;
 import java.util.Base64.Encoder;
@@ -44,19 +42,30 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 public class ControladorEncriptacion {
-
-	private final String PATH = "C:/encrypt/asymetric/";//esta ruta es para probar si se esta guardando la firma digital
-	private static KeyPair kp;
-	private static String rutaArchivFirmar;
-	
-	
-	public KeyPair crearLlaves() throws Exception {
+		private final String MESSAGE_ENCRYPT_EXTENSION = ".encript";
+		private final String PATH = "C:/encrypt/asymetric/";
+		private static KeyPair kp;
+		private static String rutaArchivFirmar;
+		public static ArrayList<String> listaLlaves = new ArrayList<String>();
+		
+	public ArrayList<String> crearLlaves() throws Exception {
+		String llavePrivada;
+		String llavePublica;
 		
 		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-		keyGen.initialize(1024);
+		SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
+
+		keyGen.initialize(1024,random);
 		KeyPair pair = keyGen.generateKeyPair();
+		byte[]	 priv = pair.getPrivate().getEncoded();
+		byte[]	 pub = pair.getPublic().getEncoded();
+
+		llavePrivada = convertirLlavesString(priv);
+		llavePublica = convertirLlavesString(pub);
+		listaLlaves.add(llavePrivada);
+		listaLlaves.add(llavePublica);
 		
-		return pair;		
+		return listaLlaves;		
 		
 	}
 	public String convertirLlavesString(byte[] llave) {
@@ -66,51 +75,72 @@ public class ControladorEncriptacion {
 		
 		return keyAsString;
 	}
-	public Key decodePublicKey(byte[] llavePublica) throws GeneralSecurityException, IOException {
-		KeyFactory kf = KeyFactory.getInstance("RSA");
-		PublicKey publicKey = kf.generatePublic(new X509EncodedKeySpec(llavePublica));
-		return publicKey;
-		
-			
-		
+	public Key decodeKeyFromString(String keyString) throws GeneralSecurityException, IOException {
+		 byte[] data = Base64.getDecoder().decode((keyString.getBytes()));
+		 X509EncodedKeySpec spec = new X509EncodedKeySpec(data);
+		 KeyFactory fact = KeyFactory.getInstance("RSA");
+		 return fact.generatePublic(spec);
 	}
 	public Key decodePrivateKeyFromString(String privateKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
+			
+			byte[] data = Base64.getDecoder().decode((privateKey.getBytes()));
+			PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(data);
+			 KeyFactory fact = KeyFactory.getInstance("RSA");
+			 return fact.generatePrivate(spec);
+			
+		}
+	public String decryptMessage(String messageName, String keyName) throws Exception {
+		PrivateKey privKey = (PrivateKey) decodePrivateKeyFromString(keyName);
+		Cipher cipher = Cipher.getInstance("RSA");
+		cipher.init(Cipher.DECRYPT_MODE, privKey);
+		byte[] encryptedMessage = readMessageFile(messageName);
+		byte[] decryptedData = cipher.doFinal(encryptedMessage);
+	    String messagedescode = new String(decryptedData,StandardCharsets.UTF_8);
 		
-		byte[] data = Base64.getDecoder().decode((privateKey.getBytes()));
-		PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(data);
-		 KeyFactory fact = KeyFactory.getInstance("RSA");
-		 return fact.generatePrivate(spec);
-		
+		return "El mensaje es :"+"\n"+messagedescode;
+
 	}
 	
-	
 
 
-	public byte[] encryptMessage(String message, byte[] publickey) throws Exception {
-		PublicKey pubKey = (PublicKey) decodePublicKey(publickey);
+	public String encryptMessage(String nombreTramite,String message, String publickey) throws Exception {
+		
+		PublicKey pubKey = (PublicKey) decodeKeyFromString(publickey);
 		Cipher cipher = Cipher.getInstance("RSA");
 		cipher.init(Cipher.ENCRYPT_MODE, pubKey);
 		byte[] encryptedData = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
-	    Encoder oneEncoder = Base64.getEncoder().withoutPadding();
+	    Encoder oneEncoder = Base64.getEncoder();
 	    encryptedData = oneEncoder.encode(encryptedData);
-	   return encryptedData;
+	    String mensajeString = new String(encryptedData,StandardCharsets.UTF_8);
+	    writeBytesFile(nombreTramite,encryptedData,MESSAGE_ENCRYPT_EXTENSION);
+	    return mensajeString;
+	    
 	}
-	public String decryptMessage(String message, String privatekey) throws Exception {
-		PrivateKey privKey = (PrivateKey) decodePrivateKeyFromString(privatekey);
-		Cipher cipher = Cipher.getInstance("RSA");
-		cipher.init(Cipher.DECRYPT_MODE, privKey);
-		byte[] encryptedMessage = readMessageFile(message);
-		byte[] decryptedData = cipher.doFinal(encryptedMessage);
-		String descryMessage = new String(decryptedData,StandardCharsets.UTF_8);
-		return descryMessage;	
-  	}
 	
-	private byte[] readMessageFile(String message) throws Exception{
-        int length = message.length();
+	
+
+	private void writeBytesFile(String name, byte[] content, String type) throws FileNotFoundException, IOException{	
+		FileOutputStream fos = new FileOutputStream(PATH + name + type);
+		fos.write(content);
+		fos.close();
+		
+	}
+	
+	
+	private byte[] readMessageFile(String messageName) throws Exception{
+		File file = new File(PATH + messageName + MESSAGE_ENCRYPT_EXTENSION);
+        int length = (int) file.length();
+        BufferedInputStream reader = new BufferedInputStream(new FileInputStream(file));
         byte[] bytes = new byte[length];
+        reader.read(bytes, 0, length);
+        reader.close();
         Decoder oneDecoder = Base64.getDecoder();
 		return oneDecoder.decode(bytes);
+			
+		
 	}
+		
+	
 	
 	public void firmarTramite()  throws Exception {
 		
