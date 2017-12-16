@@ -1,44 +1,77 @@
-CREATE DATABASE SistemaCompras
-	CHARACTER SET utf8
-	COLLATE utf8_general_ci;
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               10.2.10-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
+-- HeidiSQL Version:             9.4.0.5125
+-- --------------------------------------------------------
 
-USE SistemaCompras
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-CREATE TABLE tDepartamento(
-  idDepartamento INT NOT NULL AUTO_INCREMENT,	
-  NombreDepartamento varchar (60),
-  LlavePublica varchar (1024),
-  PRIMARY KEY (idDepartamento)
-  );
 
-CREATE TABLE tTramite(
-  idTramite INT NOT NULL AUTO_INCREMENT,
-  DescripcionTramite varchar (500),
-  FirmaDigitalTramite varchar (250),
-  OrigenTramite varchar (250),
-  DestinoTramite varchar (250),
-  PRIMARY KEY (idTramite) 
-  );
+-- Dumping database structure for sistemacompras
+CREATE DATABASE IF NOT EXISTS `sistemacompras` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `sistemacompras`;
 
-CREATE TABLE tEmpleado(
-  idEmpleado INT NOT NULL AUTO_INCREMENT,
-  NombreEmpleado varchar (60),
-  RolEmpleado varchar (60),
-  idDepartamento INT NOT NULL,
-  FOREIGN KEY (idDepartamento) REFERENCES tDepartamento(idDepartamento),
-  PRIMARY KEY (idEmpleado)
-  );
+-- Dumping structure for table sistemacompras.tdepartamento
+CREATE TABLE IF NOT EXISTS `tdepartamento` (
+  `idDepartamento` int(11) NOT NULL AUTO_INCREMENT,
+  `NombreDepartamento` varchar(60) DEFAULT NULL,
+  `LlavePublica` blob DEFAULT NULL,
+  `LlavePrivada` blob DEFAULT NULL,
+  PRIMARY KEY (`idDepartamento`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-INSERT INTO tDepartamento (NombreDepartamento)
-    SELECT  'IT'
-    UNION ALL 
-    SELECT  'Finanzas'
-    UNION ALL 
-    SELECT  'Administracion'
+-- Dumping data for table sistemacompras.tdepartamento: ~4 rows (approximately)
+/*!40000 ALTER TABLE `tdepartamento` DISABLE KEYS */;
+INSERT INTO `tdepartamento` (`idDepartamento`, `NombreDepartamento`, `LlavePublica`, `LlavePrivada`) VALUES
+	(1, 'Administracion', NULL, NULL),
+	(2, 'Finanzas', NULL, NULL),
+	(3, 'IT', NULL, NULL),
+	(4, 'Otros', _binary 0x4D4677774451594A4B6F5A496876634E41514542425141445377417753414A4241494C62326330702B2B5666444F4733536A584873484265344549413731784D59486E73563869764E7565454C47384C78426D3168724848684B5931766E48512F562B4A774F74754B7A794E59416E75466B4253556C55434177454141513D3D, _binary 0x4D494942564149424144414E42676B71686B6947397730424151454641415343415434776767453641674541416B45416774765A7A536E373556384D3462644B4E63657763463767516744765845786765657858794B383235345173627776454762574773636545706A572B6364443958346E4136323472504931674365345751464A535651494441514142416B41427054482F326C39496177474764502B42335A6A69554D38524257483944786A4862366C4B354B6B5545426A413375465347334F2F41494A346C6839734D53616B597130746A436B6A314A6536663357752F66304241694541786C556F3047716D7173677844587679435666696F454C396E70386A506163616D33686D7365482B59676B434951436F3645716F3046385057427734734573704D707432757A536F6353694B4B30646F34387A746A476B51375149684149643073694E6D4D3936415338424233745379795831625134794B633638763665513148793575677962424169425242765A68323276757758627758756E2F666D3644323753634A59537347367A724458544F6444416D31514967475A474A72737030455939316E5571727533505A7079346A6743316E4B524A4F4A49566D654A32595579633D);
+/*!40000 ALTER TABLE `tdepartamento` ENABLE KEYS */;
 
-INSERT INTO tEmpleado (NombreEmpleado, RolEmpleado, idDepartamento)
-    SELECT  'Hayleen Bonilla', 'X', 1
-    UNION ALL 
-    SELECT  'Danilo Calderon', 'X', 2
-    UNION ALL 
-    SELECT  'Daniel Arroyo', 'X', 3
+-- Dumping structure for table sistemacompras.templeado
+CREATE TABLE IF NOT EXISTS `templeado` (
+  `idEmpleado` int(11) NOT NULL AUTO_INCREMENT,
+  `NombreEmpleado` varchar(60) DEFAULT NULL,
+  `RolEmpleado` varchar(60) DEFAULT NULL,
+  `Contrasenna` varchar(60) DEFAULT NULL,
+  `idDepartamento` int(11) NOT NULL,
+  PRIMARY KEY (`idEmpleado`),
+  KEY `idDepartamento` (`idDepartamento`),
+  CONSTRAINT `templeado_ibfk_1` FOREIGN KEY (`idDepartamento`) REFERENCES `tdepartamento` (`idDepartamento`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table sistemacompras.templeado: ~3 rows (approximately)
+/*!40000 ALTER TABLE `templeado` DISABLE KEYS */;
+INSERT INTO `templeado` (`idEmpleado`, `NombreEmpleado`, `RolEmpleado`, `Contrasenna`, `idDepartamento`) VALUES
+	(1, 'Hayleen Bonilla', 'X', NULL, 1),
+	(2, 'Danilo Calderon', 'X', NULL, 2),
+	(3, 'Daniel Arroyo', 'X', NULL, 3);
+/*!40000 ALTER TABLE `templeado` ENABLE KEYS */;
+
+-- Dumping structure for table sistemacompras.ttramite
+CREATE TABLE IF NOT EXISTS `ttramite` (
+  `idTramite` int(11) NOT NULL AUTO_INCREMENT,
+  `NombreTramite` varchar(50) NOT NULL DEFAULT '0',
+  `DescripcionTramite` varchar(500) DEFAULT NULL,
+  `ContenidoTramite` blob DEFAULT NULL,
+  `FirmaDigitalTramite` varchar(250) DEFAULT NULL,
+  `OrigenTramite` varchar(250) DEFAULT NULL,
+  `DestinoTramite` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`idTramite`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table sistemacompras.ttramite: ~0 rows (approximately)
+/*!40000 ALTER TABLE `ttramite` DISABLE KEYS */;
+INSERT INTO `ttramite` (`idTramite`, `NombreTramite`, `DescripcionTramite`, `ContenidoTramite`, `FirmaDigitalTramite`, `OrigenTramite`, `DestinoTramite`) VALUES
+	(1, '0', 'Este tramite viene desde el main', _binary 0x65446E51795A41704A6E6A566A2B69794F62576572635971316E6C494159466B45654B344D514F37457676655A2F5354583646494C71346B4B6645636C475743704F685741425A7451674162565559686D5A556330773D3D, 'Danilo', 'QA DEPARTMENT', 'Logistica');
+/*!40000 ALTER TABLE `ttramite` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

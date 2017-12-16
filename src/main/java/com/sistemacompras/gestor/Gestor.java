@@ -15,7 +15,6 @@ public class Gestor {
     private static final MTramite TRAMITE = new MTramite();
     private static final MEmpleado EMPLEADO = new MEmpleado();
     private static Empleado empleadoActivo;
-    private static String cedula;
     
     public Integer login(int id, String pass) throws Exception{
         empleadoActivo = EMPLEADO.buscarPorID(id);
