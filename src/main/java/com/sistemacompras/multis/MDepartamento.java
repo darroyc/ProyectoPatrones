@@ -11,7 +11,6 @@ import com.sistemacompras.objects.Empleado;
 
 public class MDepartamento {
 
-	
 	public void crear(String nombreDepartamento) throws Exception {
 		String sql;
 		ControladorEncriptacion encrytar = new ControladorEncriptacion();
@@ -19,17 +18,14 @@ public class MDepartamento {
 		kp = encrytar.crearLlaves();
 		byte[]	 priv = kp.getPrivate().getEncoded();
 		byte[]	 pub = kp.getPublic().getEncoded();
-			
-			sql="UPDATE tDepartamento "+
-			    "SET LlavePublica='"+pub+"',LlavePrivada='"+priv+"',"+
-			    "WHERE nombreDepartamento='"+nombreDepartamento+"';";
+		
+			sql ="insert into tdepartamento (NombreDepartamento,LlavePublica,LlavePrivada)"+
+					"values('"+nombreDepartamento+"','"+pub+"','"+priv+"');";
 			try {
 				getConector().ejecutarSQL(sql);
 			} catch (Exception e) {
 				throw new Exception ("El departamento ya existe en el sistema.");
-					
 			}	
-		
 	}
     
     public Departamento buscarPorId(int idDepartamento) throws java.sql.SQLException,Exception{
@@ -54,6 +50,25 @@ public class MDepartamento {
         rs.close();
         return departamento;
     }
+    
+    public String buscarNombrePorId(int idDepartamento) throws java.sql.SQLException,Exception{
+        Departamento departamento;
+         java.sql.ResultSet rs;
+         String sql;
+         sql = "SELECT NombreDepartamento "+
+         "FROM tDepartamento "+
+         "WHERE idDepartamento='"+idDepartamento+"';";
+         rs = getConector().ejecutarSQL(sql,true);
+
+         if (rs.next()){
+         	sql = rs.getString("NombreDepartamento");
+         } else {
+             throw new Exception ("Departamento no encontrado intentelo de nuevo.");
+             }
+
+         rs.close();
+         return sql;
+     }
     
     public Departamento buscarPorNombre(String nombreDepartamento) throws java.sql.SQLException,Exception{
         Departamento departamento;
@@ -95,7 +110,7 @@ public class MDepartamento {
             do {
             	empleado = new Empleado(
 	                rs.getInt("idEmpleado"),
-	                rs.getString("nombreEmpleado"),
+	                rs.getString("NombreEmpleado"),
 	                rs.getString("RolEmpleado"),
 	                rs.getString("ContrasennaEmpleado"),
 	                rs.getInt("idDepartamento")
@@ -138,7 +153,7 @@ public class MDepartamento {
         catch (Exception e) {
             throw new Exception ("El Departamento no está registrado.");
         }
-    }
+}
 	
     public String buscarLlavePublica(int idDepartamento) throws java.sql.SQLException,Exception{
         String llavePublica;
@@ -158,8 +173,4 @@ public class MDepartamento {
         rs.close();
         return llavePublica;
     }
-    
-
-    
-    
 }

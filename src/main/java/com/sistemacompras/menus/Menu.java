@@ -22,13 +22,26 @@ public class Menu {
         id = Integer.parseInt(in.readLine());
         print("\nIngrese su contrasenia");
         pass = in.readLine();
-        
-        opcion = GESTOR.login(id, pass);
-        if(!opcion.equals(null)){
-        	FabricaMenu.crearNuevoMenu(Departamentos.values()[opcion-1]);
-        }else{
-        	login();
-        }
+       
+	        switch(GESTOR.login(id, pass)){
+	        	case "Administracion":
+		        	MenuAdministracion menuAdministracion = new MenuAdministracion();
+		        	//menuAdministracion.init();
+		        	
+	        	case "Finanzas":
+		        	MenuFinanzas menuFinanzas = new MenuFinanzas();
+		        	//menuFinanzas.init();
+		        	
+		        case "IT":
+		        	MenuIT menuIT = new MenuIT();
+		        	menuIT.init();
+		        
+		        case "Otros":
+		        	MenuSolicitante menuSolicitante = new MenuSolicitante();
+		        	//menuSolicitante.init();
+		        case "":
+		        	login();
+	        }
     }
     
     protected void print(String msg){

@@ -12,7 +12,7 @@ public class MenuIT extends Menu{
 	
 	Gestor gestor1 = new Gestor();
 
-    public void menuIt()throws java.sql.SQLException, Exception{
+    public void init()throws java.sql.SQLException, Exception{
     	
     	boolean continuar = false;
     	int opc = 0;
@@ -32,6 +32,33 @@ public class MenuIT extends Menu{
 
     		case 1:
     			crearTramite();
+    			String nombreTramite = "";
+    			String descripcionTramite = "";
+    			String contenidoTramite = "";
+    			String firmaDigTramite = "";
+    			String origenTramite = "";
+    			String destinoTramite = "";
+        		
+        		System.out.println("Deme el nombre de su tramite");
+        		nombreTramite = in.readLine();
+        		
+        		System.out.println("Describa al tramite.");
+        		descripcionTramite = in.readLine();
+        		
+        		System.out.println("Ingrese textualmente el contenido del traminte.");
+        		contenidoTramite = in.readLine();
+        		
+        		System.out.println("Ingrese su firma Digital");
+        		firmaDigTramite = in.readLine();
+        		
+        		System.out.println("Digite el origen del tramite.");
+        		origenTramite = in.readLine();
+        		
+        		System.out.println("Digite el destino del traminte");
+        		destinoTramite = in.readLine();
+        		
+        		gestor1.crearTramite(nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, origenTramite, destinoTramite);
+
     		case 2:
     			buscarTramiteId();
     			break;

@@ -5,6 +5,7 @@
  */
 package com.sistemacompras.gestor;
 
+import com.sistemacompras.enums.Departamentos;
 import com.sistemacompras.multis.*;
 import com.sistemacompras.objects.*;
 
@@ -18,13 +19,14 @@ public class Gestor {
     private static final MEmpleado EMPLEADO = new MEmpleado();
     private static Empleado empleadoActivo;
     
-    public Integer login(int id, String pass) throws Exception{
+    public String login(int id, String pass) throws Exception{
         empleadoActivo = EMPLEADO.buscarPorID(id);
         if(empleadoActivo.getConstrasenna().equals(pass)){
-        	return empleadoActivo.getIdDepartamento();
-        	}
-       return null;
+        	return DEPARTAMENTO.buscarNombrePorId(empleadoActivo.getIdDepartamento());
+        }
+        return "";
     }
+  
 
     public void crearTramite(String nombreTramite, String descripcionTramite ,
     		String contenidoTramite, String firmaDigTramite, String origenTramite, String destinoTramite) throws Exception {
