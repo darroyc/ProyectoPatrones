@@ -14,7 +14,12 @@ public class MTramite {
 	 MDepartamento buscardepartamento = new MDepartamento();
 	 Departamento departamento;
 	 
-    public void crearTramite(String nombreTramite,String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
+	
+	 
+    public MTramite() {
+	}
+
+	public void crearTramite(String nombreTramite,String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
         String sql;
         String llavePublica;
         String mensajeEncriptado;
