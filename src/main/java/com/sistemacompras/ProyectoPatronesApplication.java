@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 import com.sistemacompras.menus.*;
 
@@ -14,8 +15,13 @@ import com.sistemacompras.menus.*;
 public class ProyectoPatronesApplication {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	
-	
 	public static void main(String[] args) throws SQLException, Exception {
-		SpringApplication.run(Menu.class, args);
+		new SpringApplicationBuilder()
+	    .bannerMode(Banner.Mode.OFF)
+	    .sources(ProyectoPatronesApplication.class)
+	    .run(args);
+		Menu menu = new Menu();
+		menu.login();
+		
 	}	
 }
