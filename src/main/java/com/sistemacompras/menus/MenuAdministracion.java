@@ -1,9 +1,6 @@
 package com.sistemacompras.menus;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-import com.sistemacompras.multis.MTramite;
 
 public class MenuAdministracion extends iMenu{
 	
