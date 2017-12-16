@@ -15,6 +15,7 @@ public class MenuAdministracion extends Menu{
     	String dato = "";
     	
     	do {
+    		
     		System.out.println("1. Crear Tramite");
     		System.out.println("2. Buscar tramite por id");
     		System.out.println("3. Buscar tramite por nombre");
