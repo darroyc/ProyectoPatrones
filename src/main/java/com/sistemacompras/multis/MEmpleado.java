@@ -17,9 +17,9 @@ public class MEmpleado {
 	        if (rs.next()){
 	        	empleado = new Empleado(
 		                rs.getInt("idEmpleado"),
-		                rs.getString("nombreEmpleado"),
+		                rs.getString("NombreEmpleado"),
 		                rs.getString("RolEmpleado"),
-		                rs.getString("Contrasenna"),
+		                rs.getString("ContrasennaEmpleado"),
 		                rs.getInt("idDepartamento")
 	                );
 	        } else {

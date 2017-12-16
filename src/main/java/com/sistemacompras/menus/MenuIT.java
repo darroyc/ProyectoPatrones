@@ -7,7 +7,7 @@ import com.sistemacompras.objects.Tramite;
 
 public class MenuIT extends Menu{
 
-    public void menuIt()throws java.sql.SQLException, Exception{
+    public void init()throws java.sql.SQLException, Exception{
     	
     	boolean continuar = true;
     	int opc = 0;

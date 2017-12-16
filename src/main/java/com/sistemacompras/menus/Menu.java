@@ -23,10 +23,25 @@ public class Menu {
         print("\nIngrese su contrasenia");
         pass = in.readLine();
         
-        opcion = GESTOR.login(id, pass);
-        if(!opcion.equals(null)){
-        	FabricaMenu.crearNuevoMenu(Departamentos.values()[opcion-1]);
-        }else{
+        if(!GESTOR.login(id, pass).isEmpty()) {
+	        switch(GESTOR.login(id, pass)){
+	        	case "Administracion":
+		        	MenuAdministracion menuAdministracion = new MenuAdministracion();
+		        	//menuAdministracion.init();
+		        	
+	        	case "Finanzas":
+		        	MenuDepartamento menuDepartamento = new MenuDepartamento();//MenuFinanzas menuFinanzas = new MenuFinanzas();
+		        	//menuDepartamento.init();//menuFinanzas.init();
+		        	
+		        case "IT":
+		        	MenuIT menuIT = new MenuIT();
+		        	menuIT.init();
+		        
+		        case "Otros":
+		        	MenuSolicitante menuSolicitante = new MenuSolicitante();
+		        	//menuSolicitante.init();    
+	        }
+        }else {
         	login();
         }
     }
