@@ -6,20 +6,46 @@ import java.util.ArrayList;
 import com.sistemacompras.encriptacion.ControladorEncriptacion;
 import com.sistemacompras.multis.MDepartamento;
 import com.sistemacompras.multis.MTramite;
+import com.sistemacompras.objects.Departamento;
 import com.sistemacompras.objects.Tramite;
 
 public class Main {
 	
-	public static MTramite pruebaTramite;
+	
 	
 	public static void main(String[] args) throws SQLException, Exception {
-//		Tramite tramite;
-//		
-//		pruebaTramite = new MTramite();
+		String privateKey, message;
+		Departamento depa;
+		Tramite tramite;
+		MTramite pruebaTramite = new MTramite();
+		MDepartamento pruebaDepartamento = new MDepartamento();
+		ControladorEncriptacion encrypt = new ControladorEncriptacion();
+		
+		depa = pruebaDepartamento.buscarDepartamentoPorNombre("QA");	
+		
+		privateKey = depa.getLlavePrivada();
+		tramite =  pruebaTramite.buscarTramite(16);
+		message = tramite.getContenido();
+		System.out.println(message = tramite.getContenido());
+		
+		encrypt.decryptMessage(message, privateKey);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
 //		
 //		try {
-//			pruebaTramite.crearTramite("Este tramite viene desde el main",
-//					"Estoy haciendo la prueba de encry", "Danilo", "IT", "Logistica");
+//			pruebaTramite.crearTramite("Tramite de los vasos", "Este tramite se hizo hoy", " mas vasos para la fiesta de la alegria",
+//					"DVC", "Ventas", "IT");
 //			System.out.println("Se logro la insercion de datos");
 //		} catch (Exception e) {
 //			
@@ -27,11 +53,11 @@ public class Main {
 //		}
 	
 	
-//	
-//		
-//		MDepartamento pruebaDepartamento = new MDepartamento();
+	
+		
+		
 //		try {
-//			pruebaDepartamento.crearDepartamento("Ventas");
+//			pruebaDepartamento.crearDepartamento("QA");
 //			System.out.println("Se logro la insercion de datos");
 //		} catch (Exception e) {
 //			e.printStackTrace();
@@ -39,8 +65,8 @@ public class Main {
 //		}
 		
 	
-		pruebaTramite = new MTramite();
-		pruebaTramite.crearTramite("Esto es un tramite de prueba", "contenido a encriptar", "Firma", "Logistica", "IT");
+//		pruebaTramite = new MTramite();
+//		pruebaTramite.crearTramite("Esto es un tramite de prueba", "contenido a encriptar", "Firma", "Logistica", "IT");
 		
 		
 		
