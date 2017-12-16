@@ -1,6 +1,7 @@
 package com.sistemacompras.menus;
 
 import com.sistemacompras.enums.Departamentos;
+import com.sistemacompras.gestor.Gestor;
 import com.sistemacompras.multis.*;
 import com.sistemacompras.objects.Tramite;
 
@@ -13,10 +14,10 @@ public class MenuIT extends Menu{
     	String dato = "";
     	
     	do {
-    		System.out.println("Crear Tramite");
-    		System.out.println("Opcion1");
-    		System.out.println("Opcion1");
-    		System.out.println("Opcion1");
+    		System.out.println("1. Crear Tramite");
+    		System.out.println("2. Encriptar tramite");
+    		System.out.println("3. Listar tramites");
+    		System.out.println("4.  ");
     		
     		dato = in.readLine();
     		opc = Integer.parseInt(dato);
@@ -54,8 +55,14 @@ public class MenuIT extends Menu{
         		
         		System.out.println("Digite el destino del traminte");
         		destinoTramite = in.readLine();
-
-    			Tramite tramite = new Tramite(idTramite, nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, origenTramite, destinoTramite);
+        		
+//        		public Gestor gestorcito = new Gestor();
+        		
+//        		gestorcito.crearTramite();
+        		
+//        		crearTramite(nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, origenTramite, destinoTramite);
+//
+//    			MTramite tramite = new MTramite(idTramite, nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, origenTramite, destinoTramite);
     			break;
     		
     		case 2:

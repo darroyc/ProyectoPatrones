@@ -52,16 +52,9 @@ public class ControladorEncriptacion {
 	
 	public KeyPair crearLlaves() throws Exception {
 		
-		 ArrayList<Byte> listaLlaves = new ArrayList<Byte>();
 		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-		keyGen.initialize(512);
+		keyGen.initialize(1024);
 		KeyPair pair = keyGen.generateKeyPair();
-//		byte[]	 priv = pair.getPrivate().getEncoded();
-//		byte[]	 pub = pair.getPublic().getEncoded();
-		
-		
-
-	
 		
 		return pair;		
 		
@@ -73,12 +66,12 @@ public class ControladorEncriptacion {
 		
 		return keyAsString;
 	}
-	public Key decodePublicKeyFromString(String keyString) throws GeneralSecurityException, IOException {
+	public Key decodePublicKey(byte[] llavePublica) throws GeneralSecurityException, IOException {
+		KeyFactory kf = KeyFactory.getInstance("RSA");
+		PublicKey publicKey = kf.generatePublic(new X509EncodedKeySpec(llavePublica));
+		return publicKey;
 		
-				byte[] data = Base64.getDecoder().decode((keyString.getBytes()));
-				 X509EncodedKeySpec spec = new X509EncodedKeySpec(data);
-				 KeyFactory fact = KeyFactory.getInstance("RSA");
-				 return fact.generatePublic(spec);
+			
 		
 	}
 	public Key decodePrivateKeyFromString(String privateKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -93,15 +86,14 @@ public class ControladorEncriptacion {
 	
 
 
-	public String encryptMessage(String message, String publickey) throws Exception {
-		PublicKey pubKey = (PublicKey) decodePublicKeyFromString(publickey);
+	public byte[] encryptMessage(String message, byte[] publickey) throws Exception {
+		PublicKey pubKey = (PublicKey) decodePublicKey(publickey);
 		Cipher cipher = Cipher.getInstance("RSA");
 		cipher.init(Cipher.ENCRYPT_MODE, pubKey);
 		byte[] encryptedData = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
 	    Encoder oneEncoder = Base64.getEncoder().withoutPadding();
 	    encryptedData = oneEncoder.encode(encryptedData);
-	    String mensajeString = new String(encryptedData,StandardCharsets.UTF_8);
-	    return mensajeString;
+	   return encryptedData;
 	}
 	public String decryptMessage(String message, String privatekey) throws Exception {
 		PrivateKey privKey = (PrivateKey) decodePrivateKeyFromString(privatekey);
