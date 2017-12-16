@@ -1,6 +1,5 @@
 package com.sistemacompras.multis;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.sistemacompras.encriptacion.ControladorEncriptacion;
@@ -14,12 +13,17 @@ public class MTramite {
 	Tramite tramite;
 	 MDepartamento buscardepartamento = new MDepartamento();
 	 Departamento departamento;
+<<<<<<< HEAD
     public void crearTramite(String nombreTramite,String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
+=======
+    public void crearTramite(String descripcionTramite,String contenidoTramite,
+    		String firmaDigital,String origen,String destino) throws Exception{
+>>>>>>> cadb47d991f56d3bc25a39c2318822685bf85eff
         String sql;
         String llavePublica;
         String mensajeEncriptado;
         
-        departamento = buscardepartamento.buscarDepartamentoPorNombre(origen);
+        departamento = buscardepartamento.buscarPorNombre(origen);
         llavePublica= departamento.getLlavePublica();
         mensajeEncriptado= encriptarMensaje.encryptMessage(contenidoTramite, llavePublica);
         
