@@ -19,7 +19,8 @@ public class MenuFinanzas extends Menu{
     		System.out.println("2. Buscar tramite por id");
     		System.out.println("3. Buscar tramite por nombre");
     		System.out.println("4. Cambiar destino de tramite");
-    		System.out.println("5. Salir");
+    		System.out.println("5. Opción ver estado del tramite");
+    		System.out.println("6. Salir");
     		
     		dato = in.readLine();
     		opc = Integer.parseInt(dato);
@@ -65,6 +66,9 @@ public class MenuFinanzas extends Menu{
     			cambiarDestino();
     			break;
     		case 5:
+    			
+    			break;
+    		case 6:
     			continuar = false;
     			break;
     		default:
