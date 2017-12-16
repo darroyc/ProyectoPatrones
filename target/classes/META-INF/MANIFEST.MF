@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: ProyectoPatrones
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Danny
+Built-By: Hayleen
 Implementation-Vendor-Id: com.sistemacompras
 Build-Jdk: 1.8.0_151
 Implementation-URL: http://projects.spring.io/spring-boot/App/
