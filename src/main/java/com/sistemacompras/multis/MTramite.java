@@ -87,7 +87,6 @@ public class MTramite {
 
          rs.close();
          return tramite;
-    
     	
     }
     
@@ -149,8 +148,5 @@ public class MTramite {
             catch (Exception e) {
                 throw new Exception ("Tramite no registrado.");
             }
-            
     }
-    
-
 }

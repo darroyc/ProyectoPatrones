@@ -18,10 +18,6 @@ public class Main {
 	
 	public static void main(String[] args) throws SQLException, Exception {
 		
-		
-		
-		
-		
 		MDepartamento pruebaDepartamento =  new MDepartamento();
 		Departamento departamento;
 		departamento = pruebaDepartamento.buscarPorNombre("VoIP");
@@ -62,7 +58,4 @@ public class Main {
 		
 	
 	}
-	
-
-
 }
