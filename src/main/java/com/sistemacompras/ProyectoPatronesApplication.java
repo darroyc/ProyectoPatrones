@@ -11,6 +11,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 
 import com.sistemacompras.menus.*;
 
+
 @SpringBootApplication
 public class ProyectoPatronesApplication {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,5 +24,7 @@ public class ProyectoPatronesApplication {
 		Menu menu = new Menu();
 		menu.login();
 		
+		
+		MenuDepartamento menuDep = new MenuDepartamento();
 	}	
 }

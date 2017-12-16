@@ -11,6 +11,7 @@ import com.sistemacompras.objects.*;
 import java.util.ArrayList;
 
 public class Gestor {
+	
     private static final MDepartamento DEPARTAMENTO  = new MDepartamento();
     private static final MTramite TRAMITE = new MTramite();
     private static final MEmpleado EMPLEADO = new MEmpleado();
@@ -24,4 +25,13 @@ public class Gestor {
        return null;
     }
 
+    public void crearTramite(String nombreTramite, String descripcionTramite ,String contenidoTramite, String firmaDigTramite, String origenTramite, String destinoTramite) {
+    	
+    	
+    	
+    }
+    
+    public void crearDepartamento(String nombreDepartamento) throws Exception {
+    	DEPARTAMENTO.crear("ElDepartament");
+    }
 }
