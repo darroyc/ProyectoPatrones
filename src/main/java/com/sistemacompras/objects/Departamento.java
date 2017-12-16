@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Departamento {
 	int id;
 	String nombre;
-	byte [] llavePublica,llavePrivada;
+	String llavePublica,llavePrivada;
 	ArrayList<Empleado> listaEmpleados;
 	
 	
@@ -14,7 +14,7 @@ public class Departamento {
 		this.nombre = nombre;
 		this.listaEmpleados = listaEmpleados;
 	}
-	 public Departamento(int id,String nombre,byte[] llavePublica, byte[] llavePrivada) {
+	 public Departamento(int id,String nombre,String llavePublica, String llavePrivada) {
 		
 		 this.id = id;
 		 this.nombre = nombre;
@@ -36,16 +36,16 @@ public class Departamento {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public byte[] getLlavePublica() {
+	public String getLlavePublica() {
 		return llavePublica;
 	}
-	public void setLlavePublica(byte[] llavePublica) {
+	public void setLlavePublica(String llavePublica) {
 		this.llavePublica = llavePublica;
 	}
-	public byte[] getLlavePrivada() {
+	public String getLlavePrivada() {
 		return llavePrivada;
 	}
-	public void setLlavePrivada(byte[] llavePrivada) {
+	public void setLlavePrivada(String llavePrivada) {
 		this.llavePrivada = llavePrivada;
 	}
 	public ArrayList<Empleado> getListaEmpleados() {

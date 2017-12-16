@@ -14,13 +14,10 @@ public class MDepartamento {
 	public void crearLlaves(String nombreDepartamento) throws Exception {
 		String sql;
 		ControladorEncriptacion encrytar = new ControladorEncriptacion();
-		KeyPair kp;
-		kp = encrytar.crearLlaves();
-		byte[] priv = kp.getPrivate().getEncoded();
-		byte[] pub = kp.getPublic().getEncoded();
+		ArrayList<String> listaLlaves = encrytar.crearLlaves();
 		
 			sql="UPDATE tDepartamento "+
-			    "SET LlavePublica='"+pub+"'"+"SET LlavePrivada='"+priv+"' "+
+			    "SET LlavePublica='"+listaLlaves.get(1)+"'"+"SET LlavePrivada='"+listaLlaves.get(0)+"' "+
 			    "WHERE NombreDepartamento='"+nombreDepartamento+"';";
 			try {
 				getConector().ejecutarSQL(sql);
@@ -84,8 +81,8 @@ public class MDepartamento {
         	departamento = new Departamento(
                 rs.getInt("idDepartamento"),
                rs.getString("NombreDepartamento"),
-               rs.getBytes("LlavePublica"),
-               rs.getBytes("LlavePrivada")
+               rs.getString("LlavePublica"),
+               rs.getString("LlavePrivada")
             );
         } else {
             throw new Exception ("Departamento no encontrado intentelo de nuevo.");

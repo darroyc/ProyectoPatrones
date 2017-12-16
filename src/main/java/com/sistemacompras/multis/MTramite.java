@@ -10,26 +10,22 @@ import static com.sistemacompras.gestorbd.Conector.getConector;
 
 public class MTramite {
 	ControladorEncriptacion encriptarMensaje = new ControladorEncriptacion();
-
-	
+	Tramite tramite;
+	MDepartamento buscardepartamento = new MDepartamento();
+	Departamento departamento;
 
 	public void crearTramite(String nombreTramite,String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
-
-		Tramite tramite;
-		MDepartamento buscardepartamento = new MDepartamento();
-		Departamento departamento;
         String sql;
+        String llavePublica;
+        String mensajeEncriptado;
         
-        byte[] llavePublica;
-        byte[] mensajeEncytado;
-
-		departamento = buscardepartamento.buscarPorNombre("VoIP");
-		
-		llavePublica = departamento.getLlavePublica();
-		mensajeEncytado =	encriptarMensaje.encryptMessage(contenidoTramite, llavePublica);
-		
-		sql="INSERT INTO tTramite (NombreTramite,DescripcionTramite,ContenidoTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
-        "VALUES ('"+nombreTramite+"','"+descripcionTramite+"','"+mensajeEncytado+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
+        departamento = buscardepartamento.buscarDepartamentoPorNombre(origen);
+        llavePublica= departamento.getLlavePublica();
+        
+        mensajeEncriptado = encriptarMensaje.encryptMessage(nombreTramite,contenidoTramite, llavePublica);
+        
+        sql="INSERT INTO tTramite (nombreTramite,DescripcionTramite,ContenidoTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
+        "VALUES ('"+nombreTramite+"','"+descripcionTramite+"','"+mensajeEncriptado+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
         
 		try {
 			getConector().ejecutarSQL(sql);
