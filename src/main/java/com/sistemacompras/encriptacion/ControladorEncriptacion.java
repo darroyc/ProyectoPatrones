@@ -49,7 +49,6 @@ public class ControladorEncriptacion {
 	private static KeyPair kp;
 	private static String rutaArchivFirmar;
 	
-	
 	public KeyPair crearLlaves() throws Exception {
 		
 		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
@@ -59,6 +58,7 @@ public class ControladorEncriptacion {
 		return pair;		
 		
 	}
+	
 	public String convertirLlavesString(byte[] llave) {
 		
 
@@ -66,6 +66,7 @@ public class ControladorEncriptacion {
 		
 		return keyAsString;
 	}
+	
 	public Key decodePublicKey(byte[] llavePublica) throws GeneralSecurityException, IOException {
 		KeyFactory kf = KeyFactory.getInstance("RSA");
 		PublicKey publicKey = kf.generatePublic(new X509EncodedKeySpec(llavePublica));
@@ -74,6 +75,7 @@ public class ControladorEncriptacion {
 			
 		
 	}
+	
 	public Key decodePrivateKeyFromString(String privateKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		
 		byte[] data = Base64.getDecoder().decode((privateKey.getBytes()));
@@ -82,9 +84,6 @@ public class ControladorEncriptacion {
 		 return fact.generatePrivate(spec);
 		
 	}
-	
-	
-
 
 	public byte[] encryptMessage(String message, byte[] publickey) throws Exception {
 		PublicKey pubKey = (PublicKey) decodePublicKey(publickey);
@@ -95,6 +94,7 @@ public class ControladorEncriptacion {
 	    encryptedData = oneEncoder.encode(encryptedData);
 	   return encryptedData;
 	}
+	
 	public String decryptMessage(String message, String privatekey) throws Exception {
 		PrivateKey privKey = (PrivateKey) decodePrivateKeyFromString(privatekey);
 		Cipher cipher = Cipher.getInstance("RSA");

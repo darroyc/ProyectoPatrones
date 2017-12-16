@@ -52,8 +52,6 @@ public class MenuIT extends Menu{
         		System.out.println("Digite el destino del traminte");
         		destinoTramite = in.readLine();
         		
-
-        		
         		gestor1.crearTramite(nombreTramite, descripcionTramite, contenidoTramite, firmaDigTramite, origenTramite, destinoTramite);
 
     		case 2:

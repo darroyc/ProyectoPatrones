@@ -10,22 +10,39 @@ import static com.sistemacompras.gestorbd.Conector.getConector;
 
 public class MTramite {
 	ControladorEncriptacion encriptarMensaje = new ControladorEncriptacion();
+
+	
+
+	public void crearTramite(String nombreTramite,String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
+
 	Tramite tramite;
 	 MDepartamento buscardepartamento = new MDepartamento();
 	 Departamento departamento;
 	 
     public void crearTramite(String nombreTramite,String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
     	
+<<<<<<< HEAD
+
+=======
+>>>>>>> 91e516c003a76a1600e853a2b578aa570328f404
         String sql;
-        String llavePublica;
-        String mensajeEncriptado;
         
-        departamento = buscardepartamento.buscarPorNombre(origen);
+        byte[] llavePublica;
+        byte[] mensajeEncytado;
+		
+		MDepartamento pruebaDepartamento =  new MDepartamento();
+		Departamento departamento;
+		departamento = pruebaDepartamento.buscarPorNombre("VoIP");
+		
+		llavePublica = departamento.getLlavePublica();
+		mensajeEncytado =	encriptarMensaje.encryptMessage(contenidoTramite, llavePublica);
+		
+   
         
         
         
         sql="INSERT INTO tTramite (NombreTramite,DescripcionTramite,ContenidoTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
-        "VALUES ('"+nombreTramite+"','"+descripcionTramite+"','"+contenidoTramite+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
+        "VALUES ('"+nombreTramite+"','"+descripcionTramite+"','"+mensajeEncytado+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
         
 		try {
 			getConector().ejecutarSQL(sql);
@@ -87,7 +104,6 @@ public class MTramite {
 
          rs.close();
          return tramite;
-    
     	
     }
     
@@ -149,8 +165,5 @@ public class MTramite {
             catch (Exception e) {
                 throw new Exception ("Tramite no registrado.");
             }
-            
     }
-    
-
 }

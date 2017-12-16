@@ -18,10 +18,9 @@ public class MDepartamento {
 		kp = encrytar.crearLlaves();
 		byte[]	 priv = kp.getPrivate().getEncoded();
 		byte[]	 pub = kp.getPublic().getEncoded();
-			
-			sql="UPDATE tDepartamento "+
-			    "SET LlavePublica='"+pub+"',LlavePrivada='"+priv+"',"+
-			    "WHERE nombreDepartamento='"+nombreDepartamento+"';";
+		
+			sql ="insert into tdepartamento (NombreDepartamento,LlavePublica,LlavePrivada)"+
+					"values('"+nombreDepartamento+"','"+pub+"','"+priv+"');";
 			try {
 				getConector().ejecutarSQL(sql);
 			} catch (Exception e) {
@@ -154,7 +153,7 @@ public class MDepartamento {
         catch (Exception e) {
             throw new Exception ("El Departamento no está registrado.");
         }
-    }
+}
 	
     public String buscarLlavePublica(int idDepartamento) throws java.sql.SQLException,Exception{
         String llavePublica;
@@ -174,8 +173,4 @@ public class MDepartamento {
         rs.close();
         return llavePublica;
     }
-    
-
-    
-    
 }
