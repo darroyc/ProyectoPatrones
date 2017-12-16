@@ -10,7 +10,7 @@ import com.sistemacompras.objects.Empleado;
 public class MDepartamento {
 	ArrayList<String> listaLlaves = new ArrayList<String>();
 	
-	public void crearDepartamento(String nombreDepartamento) throws Exception {
+	public void crear(String nombreDepartamento) throws Exception {
 		String sql;
 		ControladorEncriptacion encrytar = new ControladorEncriptacion();
 		listaLlaves =  encrytar.crearLlaves();
@@ -25,7 +25,7 @@ public class MDepartamento {
 		
 	}
     
-    public Departamento buscarDepartamentoPorId(int idDepartamento) throws java.sql.SQLException,Exception{
+    public Departamento buscarPorId(int idDepartamento) throws java.sql.SQLException,Exception{
        Departamento departamento;
         java.sql.ResultSet rs;
         String sql;
@@ -38,7 +38,7 @@ public class MDepartamento {
         	departamento = new Departamento(
                 rs.getInt("idDepartamento"),
                 rs.getString("NombreDepartamento"),
-                buscarEmpleadosPorDepartamento(idDepartamento)
+                traerListaEmpleados(idDepartamento)
             );
         } else {
             throw new Exception ("Departamento no encontrado intentelo de nuevo.");
@@ -47,7 +47,8 @@ public class MDepartamento {
         rs.close();
         return departamento;
     }
-    public Departamento buscarDepartamentoPorNombre(String nombreDepartamento) throws java.sql.SQLException,Exception{
+    
+    public Departamento buscarPorNombre(String nombreDepartamento) throws java.sql.SQLException,Exception{
         Departamento departamento;
         java.sql.ResultSet rs;
         String sql;
@@ -61,8 +62,7 @@ public class MDepartamento {
                 rs.getInt("idDepartamento"),
                 rs.getString("NombreDepartamento"),
                 rs.getString("LlavePublica"),
-                rs.getString("LlavePrivada")
-                
+                rs.getString("LlavePrivada")                
             );
         } else {
             throw new Exception ("Departamento no encontrado intentelo de nuevo.");
@@ -72,34 +72,7 @@ public class MDepartamento {
         return departamento;
     }
     
-    public ArrayList<Departamento> buscarDepartamentos() throws java.sql.SQLException,Exception{
-        java.sql.ResultSet rs;
-        String sql;
-        Departamento departamento;
-        ArrayList<Departamento> Departamentos = new ArrayList<Departamento>();
-        sql="SELECT * "+
-        "FROM tDepartamento; ";
-        getConector().ejecutarSQL(sql);
-        rs = getConector().ejecutarSQL(sql,true);
-        
-        if (rs.next()) {
-            do {
-            	departamento = new Departamento(
-                        rs.getInt("idDepartamento"),
-                        rs.getString("NombreDepartamento"),
-                        buscarEmpleadosPorDepartamento(rs.getInt("idDepartamento"))
-                    );
-		Departamentos.add(departamento);
-		} while (rs.next());
-	} else {
-            throw new Exception ("No hay Departamentos disponibles.");
-        }
-
-        rs.close();
-        return Departamentos;
-    }
-    
-    public ArrayList<Empleado> buscarEmpleadosPorDepartamento(int idDepartamento)
+    public ArrayList<Empleado> traerListaEmpleados(int idDepartamento)
     		throws java.sql.SQLException,Exception{
         java.sql.ResultSet rs;
         String sql;
@@ -117,7 +90,8 @@ public class MDepartamento {
 	                rs.getInt("idEmpleado"),
 	                rs.getString("nombreEmpleado"),
 	                rs.getString("RolEmpleado"),
-	                rs.getString("ContrasennaEmpleado")
+	                rs.getString("ContrasennaEmpleado"),
+	                rs.getInt("idDepartamento")
                 );
 		empleados.add(empleado);
 		} while (rs.next());
