@@ -20,11 +20,11 @@ public class MTramite {
         String mensajeEncriptado;
         
         departamento = buscardepartamento.buscarPorNombre(origen);
-        llavePublica= departamento.getLlavePublica();
-        mensajeEncriptado= encriptarMensaje.encryptMessage(contenidoTramite, llavePublica);
+        
+        
         
         sql="INSERT INTO tTramite (NombreTramite,DescripcionTramite,ContenidoTramite, FirmaDigitalTramite, OrigenTramite, DestinoTramite) "+
-        "VALUES ('"+nombreTramite+"','"+descripcionTramite+"','"+mensajeEncriptado+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
+        "VALUES ('"+nombreTramite+"','"+descripcionTramite+"','"+contenidoTramite+"','"+firmaDigital+"','"+origen+"','"+destino+"');";
         
 		try {
 			getConector().ejecutarSQL(sql);

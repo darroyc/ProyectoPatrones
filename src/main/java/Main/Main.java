@@ -1,5 +1,6 @@
 package Main;
 
+import java.security.KeyPair;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,11 +12,12 @@ import com.sistemacompras.objects.Tramite;
 
 public class Main {
 	
-	
+	private static KeyPair kp;
 	
 	public static void main(String[] args) throws SQLException, Exception {
-		String privateKey, message;
-
+		
+		
+		
 		
 		
 		
