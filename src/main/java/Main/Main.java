@@ -4,6 +4,8 @@ import java.security.KeyPair;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.assertj.core.data.Percentage;
+
 import com.sistemacompras.encriptacion.ControladorEncriptacion;
 import com.sistemacompras.multis.MDepartamento;
 import com.sistemacompras.multis.MTramite;
@@ -20,10 +22,9 @@ public class Main {
 		
 		
 		
-		
-		
-		
-		
+		MDepartamento pruebaDepartamento =  new MDepartamento();
+		Departamento departamento;
+		departamento = pruebaDepartamento.buscarPorNombre("VoIP");
 		
 		
 		
