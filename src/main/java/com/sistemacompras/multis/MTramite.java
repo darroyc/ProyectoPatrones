@@ -13,12 +13,8 @@ public class MTramite {
 	Tramite tramite;
 	 MDepartamento buscardepartamento = new MDepartamento();
 	 Departamento departamento;
-<<<<<<< HEAD
+	 
     public void crearTramite(String nombreTramite,String descripcionTramite,String contenidoTramite,String firmaDigital,String origen,String destino) throws Exception{
-=======
-    public void crearTramite(String descripcionTramite,String contenidoTramite,
-    		String firmaDigital,String origen,String destino) throws Exception{
->>>>>>> cadb47d991f56d3bc25a39c2318822685bf85eff
         String sql;
         String llavePublica;
         String mensajeEncriptado;
@@ -65,7 +61,7 @@ public class MTramite {
         rs.close();
         return tramite;
     }
-    public Tramite buscarTramitePorNombre(String nombreTramite) throws SQLException, Exception {
+    public Tramite buscarTramitePorNombre(String nombreTramite) throws Exception {
     	 Tramite tramite;
          java.sql.ResultSet rs;
          String sql;

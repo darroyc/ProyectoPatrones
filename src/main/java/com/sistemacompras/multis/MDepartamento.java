@@ -13,7 +13,7 @@ public class MDepartamento {
 	public void crear(String nombreDepartamento) throws Exception {
 		String sql;
 		ControladorEncriptacion encrytar = new ControladorEncriptacion();
-		listaLlaves =  encrytar.crearLlaves();
+		
 			sql ="insert into tdepartamento (NombreDepartamento,LlavePublica,LlavePrivada)"+
 					"values('"+nombreDepartamento+"','"+listaLlaves.get(1)+"','"+listaLlaves.get(0)+"');";
 			try {
@@ -60,9 +60,7 @@ public class MDepartamento {
         if (rs.next()){
         	departamento = new Departamento(
                 rs.getInt("idDepartamento"),
-                rs.getString("NombreDepartamento"),
-                rs.getString("LlavePublica"),
-                rs.getString("LlavePrivada")                
+               rs.getString("NombreDepartamento"),
             );
         } else {
             throw new Exception ("Departamento no encontrado intentelo de nuevo.");
