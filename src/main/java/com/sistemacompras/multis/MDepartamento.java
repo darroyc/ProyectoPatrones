@@ -11,16 +11,17 @@ import com.sistemacompras.objects.Empleado;
 
 public class MDepartamento {
 
-	public void crear(String nombreDepartamento) throws Exception {
+	public void crearLlaves(String nombreDepartamento) throws Exception {
 		String sql;
 		ControladorEncriptacion encrytar = new ControladorEncriptacion();
 		KeyPair kp;
 		kp = encrytar.crearLlaves();
-		byte[]	 priv = kp.getPrivate().getEncoded();
-		byte[]	 pub = kp.getPublic().getEncoded();
+		byte[] priv = kp.getPrivate().getEncoded();
+		byte[] pub = kp.getPublic().getEncoded();
 		
-			sql ="insert into tdepartamento (NombreDepartamento,LlavePublica,LlavePrivada)"+
-					"values('"+nombreDepartamento+"','"+pub+"','"+priv+"');";
+			sql="UPDATE tDepartamento "+
+			    "SET LlavePublica='"+pub+"'"+"SET LlavePrivada='"+priv+"' "+
+			    "WHERE NombreDepartamento='"+nombreDepartamento+"';";
 			try {
 				getConector().ejecutarSQL(sql);
 			} catch (Exception e) {
@@ -139,21 +140,6 @@ public class MDepartamento {
             }
             
     }
-    
-    public void actualizarLlavePublica(int idDepartamento, String llavePublica) throws
-    java.sql.SQLException,Exception{
-    String sql;
-    sql="UPDATE tDepartamento "+
-    "SET LlavePublica='"+llavePublica+"'"+
-    "WHERE idDepartamento='"+idDepartamento+"';";
-    
-        try {
-            getConector().ejecutarSQL(sql); 	
-        }
-        catch (Exception e) {
-            throw new Exception ("El Departamento no está registrado.");
-        }
-}
 	
     public String buscarLlavePublica(int idDepartamento) throws java.sql.SQLException,Exception{
         String llavePublica;
