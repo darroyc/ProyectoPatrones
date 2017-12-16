@@ -4,12 +4,24 @@ public class Empleado {
 	int id;
 	String nombre;
 	String rol;
+	String constrasenna;
+	int idDepartamento;
 	
-	public Empleado(int id, String nombre, String rol) {
+	public Empleado(int id, String nombre, String rol, String constrasenna, int idDepartamento) {
 		super();
-		this.nombre = nombre;
 		this.id = id;
+		this.nombre = nombre;
 		this.rol = rol;
+		this.constrasenna = constrasenna;
+		this.idDepartamento = idDepartamento;
+	}
+
+	public String getConstrasenna() {
+		return constrasenna;
+	}
+
+	public void setConstrasenna(String constrasenna) {
+		this.constrasenna = constrasenna;
 	}
 
 	public String getNombre() {
@@ -36,9 +48,17 @@ public class Empleado {
 		this.rol = rol;
 	}
 
+	public int getIdDepartamento() {
+		return idDepartamento;
+	}
+
+	public void setIdDepartamento(int idDepartamento) {
+		this.idDepartamento = idDepartamento;
+	}
+
 	@Override
 	public String toString() {
-		return "Empleado [nombre=" + nombre + ", id=" + id + ", rol=" + rol + "]";
+		return "\nID: " + id + " Nombre: " + nombre;
 	}
 	
 }

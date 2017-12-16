@@ -17,9 +17,6 @@ target/
 *.class
 *.MF
 
-*.properties
-
-
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -36,3 +33,7 @@ nbdist/
 
 
 src/main/java/com/sitemascompras/encriptacion/ControladorEncriptacion.java
+target/classes/META-INF/MANIFEST.MF
+*.class
+target/classes/META-INF/MANIFEST.MF
+target/classes/META-INF/MANIFEST.MF

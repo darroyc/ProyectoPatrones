@@ -1,12 +1,37 @@
 package com.sistemacompras;
 
-import org.springframework.boot.SpringApplication;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.SQLException;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+
+import com.sistemacompras.gestor.Gestor;
+import com.sistemacompras.menus.*;
+import com.sistemacompras.multis.MDepartamento;
+
 
 @SpringBootApplication
+@Configuration
+@PropertySource("classpath:application.properties")
 public class ProyectoPatronesApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(ProyectoPatronesApplication.class, args);
-	}
+	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));	
+	@Autowired
+	public static Environment env;
+	
+	public static void main(String[] args) throws SQLException, Exception {
+		new SpringApplicationBuilder()
+	    .bannerMode(Banner.Mode.OFF)
+	    .sources(ProyectoPatronesApplication.class)
+	    .run(args);
+		Login login = new Login();
+		login.init();
+	}	
 }
