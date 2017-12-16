@@ -77,8 +77,7 @@ public class Tramite {
 
 	@Override
 	public String toString() {
-		return "Tramite [id=" + id + ", descripcion=" + descripcion + ", firmaDigital=" + firmaDigital + ", origen="
-				+ origen + ", destino=" + destino + "]";
+		return "ID: " + id + " - Descripcion: " + descripcion +"\n";
 	}
 	
 }
